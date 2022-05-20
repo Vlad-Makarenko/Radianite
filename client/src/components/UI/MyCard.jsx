@@ -22,7 +22,7 @@ export const MyCard = ({ card, moveCard, classes }) => {
       className={classes.join(" ")}
       src={displayName}
       alt=""
-      onClick={() => moveCard(card?.id)}
+      onClick={() => moveCard(card)}
     />
   );
 };

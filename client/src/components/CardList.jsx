@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import "../styles/CardList.css";
 import { Card } from "./Card";
 
-export const CardList = ({ classes, side, setPopupCard }) => {
+export const CardList = ({ classes, side, setPopupCard, allCards, setTableCards, TableCards }) => {
 
-  const [cards, setCards] = useState([
-    {name:"Devour.png", id: Math.random()},
-    {name:"Devour.png", id: Math.random()},
-    {name:"Devour.png", id: Math.random()},
-    {name:"Devour1.png", id: Math.random()},
-    {name:"Devour.png", id: Math.random()},
-    {name:"Devour.png", id: Math.random()},
-  ]);
+  const [cards, setCards] = useState(allCards);
+
 
   const moveCard = (target) => {
-    setCards([...cards.filter((card) => card.id !== target)]);
+    setCards([...cards.filter((card) => card.id !== target.id)]);
+    console.log("TABLE CARDS:",TableCards,"NEW Card:", target)
+    setTableCards([...TableCards, target])
+    console.log("NEW TABLE CARDS:", [...TableCards, target])
+    
+    setPopupCard(null)
   };
 
   return (
