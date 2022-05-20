@@ -1,0 +1,24 @@
+.CardList {
+    /* position: relative; */
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    /* background-color: bisque; */
+    border: 1px solid bisque;
+    background-image: url(../assets/CardBackground.png);
+    background-size:cover;
+    display: flex;
+    margin: 10px;
+    border-radius: 15px;
+    width: 800px;
+    height: 175px;
+}
+
+.Opponent {
+    top:0;
+}
+
+.User {
+    position:absolute;
+    bottom:0;
+}

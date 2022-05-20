@@ -5,10 +5,14 @@ const dotenv = require("dotenv");
 const app = express();
 dotenv.config({ path: "./.env" });
 
-app.use(express.json({ extended: true }));
-
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || 'localhost';;
+
+app.use(express.json({ extended: true }));
+app.use('/api/card', require('./routes/card.routes'))
+
+
+
 
 
 app.listen(PORT, () =>

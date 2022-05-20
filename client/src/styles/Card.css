@@ -1,0 +1,30 @@
+.CardImg {
+    height: 150px;
+    border-radius: 10px;
+    margin: 7px;
+    border: 1px solid blue;
+}
+
+.Card {
+    position: relative;
+    flex-wrap: nowrap;
+    width: 75px;
+    height: 100%;
+}
+
+.user:hover{
+    margin-top: -10px;
+}
+
+.popupImg{
+    height: 350px;
+    border-radius: 10px;
+}
+
+.popupCard{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+}
