@@ -1,72 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { CardList } from "../components/CardList";
 import { CardPopup } from "../components/CardPopup";
 import { Loader } from "../components/Loader";
 import { useHttp } from "../hooks/http.hook";
+import { useBattle } from "../hooks/battle.hook";
+import { BattleContext } from "../contexts/BattleContext";
+import { Table } from "../components/Table";
 
 function noop() {}
 
 export const Battle = () => {
   const [popupCard, setPopupCard] = useState(null); // TODO: обнулять взависимости от счетчика карт
-  const [cards, setCards] = useState([]);
   const { request, loading } = useHttp();
+  const { userCards, setUserCards, oppCards, setOppCards, tableUserCards, setTableUserCards, tableOppCards, setTableOppCards, moveCard} = useBattle();
 
-  const [UserCards, setUserCards] = useState([]);
-  const [OppCards, setOppCards] = useState([]);
-
-  console.log("Battle USER CARDS:", UserCards)
+  const getCards = useCallback( async () => {
+    const data = await request("/api/card", "POST");
+    setUserCards(data);
+    setOppCards(data);
+    console.log(data); // TODO:
+  }, [setUserCards, setOppCards, request]);
 
   useEffect(() => {
-    test();
-  }, []);
+    getCards();
+  }, [getCards]);
 
-  const test = async () => {
-    const data = await request("/api/card", "POST");
-    setCards(data);
-    console.log(data);
-  };
+  useEffect( () => {
+    console.log("TABLE USER CARD: ", tableUserCards)
+  }, [tableUserCards])
 
   if (loading) {
     return <Loader />;
   }
 
   return (
-    <div>
-      <CardList
-        classes={["CardList"]}
-        side="Opponent"
-        allCards={cards}
-        setPopupCard={noop}
-        setTableCards={setOppCards}
-        TableCards={OppCards}
-      />
-      {OppCards.length && (
+    <BattleContext.Provider
+      value={{ userCards, setUserCards, oppCards, setOppCards, tableUserCards, setTableUserCards, tableOppCards, setTableOppCards, moveCard}}
+    >
+      <div>
         <CardList
-          classes={["OppOnTable", "Table"]}
-          side="User"
-          allCards={OppCards}
-          setPopupCard={popupCard}
+          classes={["CardList"]}
+          side="Opponent"
+          cards={oppCards}
+          setPopupCard={noop}
         />
-      )}
-      {popupCard && <CardPopup popupCard={popupCard} />}
-      {UserCards.length && (
-          console.log("UserCards:", UserCards),
-        <CardList
-          classes={["UserOnTable", "Table"]}
-          side="User"
-          allCards={UserCards}
-          setPopupCard={popupCard}
-        />
-      )}
-      <CardList
-        classes={["CardList"]}
-        side="User"
-        allCards={cards}
-        setPopupCard={setPopupCard}
-        setTableCards={setUserCards}
-        TableCards={UserCards}
 
-      />
-    </div>
+        {popupCard && <CardPopup popupCard={popupCard} />}
+        <Table setPopupCard={setPopupCard}/>
+        <CardList
+          classes={["CardList"]}
+          side="User"
+          cards={userCards}
+          setPopupCard={setPopupCard}
+        />
+      </div>
+    </BattleContext.Provider>
   );
 };

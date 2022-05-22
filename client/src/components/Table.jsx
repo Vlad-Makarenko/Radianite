@@ -1,23 +1,18 @@
-import React, { useState } from "react";
-import "../styles/CardList.css";
+import React, { useContext } from "react";
+import { BattleContext } from "../contexts/BattleContext";
+import "../styles/Table.css";
 import { Card } from "./Card";
+import { CardList } from "./CardList";
 
 const noop = () => {};
 
-export const Table = ({ classes, side, setPopupCard, UserCards, OppCards  }) => {
-
+export const Table = ({ setPopupCard }) => {
+  const { tableUserCards, tableOppCards } = useContext(BattleContext);
 
   return (
-    <div className={[...classes, side].join(" ")}>
-      {UserCards.map((data, index) => (
-        <Card
-          card={data}
-          side={side.toLowerCase()}
-          moveCard={noop()}
-          key={index}
-          setPopupCard={setPopupCard}
-        />
-      ))}
+    <div className="Table">
+      <CardList classes={["TableList"]} cards={tableOppCards} setPopupCard={setPopupCard} />
+      <CardList classes={["TableList"]} cards={tableUserCards} setPopupCard={setPopupCard}/>
     </div>
   );
 };

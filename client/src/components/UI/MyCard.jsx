@@ -4,7 +4,7 @@ import "../../styles/Card.css"
 import devour from "../../assets/cards/Devour.png";
 import shirt from "../../assets/cards/Shirt.png";
 
-export const MyCard = ({ card, moveCard, classes }) => {
+export const MyCard = ({ card, classes }) => {
     let displayName = shirt
     if(!classes.includes('opponent')){
         switch (card?.name){
@@ -22,7 +22,6 @@ export const MyCard = ({ card, moveCard, classes }) => {
       className={classes.join(" ")}
       src={displayName}
       alt=""
-      onClick={() => moveCard(card)}
     />
   );
 };
