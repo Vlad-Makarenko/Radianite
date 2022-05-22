@@ -1,11 +1,8 @@
 .Table {
-    /* position: relative; */
-    /* display: flex; */
-    /* justify-content: center; */
     border-radius: 10px;
     background-color: rgba(255, 228, 196, 0.37) ;
     border: 1px solid beige;
-    height: 370px;
+    height: 350px;
     margin: 10px;
     width: 800px;
 }

@@ -1,8 +1,24 @@
 .CardImg {
-    height: 150px;
+    height: 120px;
     border-radius: 10px;
     margin: 7px;
     border: 1px solid blue;
+}
+
+.CardOnTable {
+    height: 140px;
+    margin-top: 10px;
+    
+    border: 1px solid blue;
+    /* margin: 7px; */
+    border-radius: 10px;
+}
+
+.TableCard{
+    position: relative;
+    /* flex-wrap: nowrap; */
+    margin-left: 10px;
+    height: 100%;
 }
 
 .Card {

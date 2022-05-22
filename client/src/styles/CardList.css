@@ -11,7 +11,7 @@
     margin: 10px;
     border-radius: 15px;
     width: 800px;
-    height: 175px;
+    height: 140px;
 }
 
 
@@ -19,6 +19,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
+    
     border: 1px solid rgba(190, 240, 91, 0.742);
     display: flex;
     margin: 10px;
