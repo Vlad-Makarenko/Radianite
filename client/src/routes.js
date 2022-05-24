@@ -6,6 +6,7 @@ import {Battle} from './pages/Battle'
 import {Home} from './pages/Home'
 import { Profile } from './pages/Profile';
 import { Rules } from './pages/Rules';
+import {Auth} from './pages/Auth'
 
 
 export const useRoutes = isAuthenticated => {
@@ -23,7 +24,7 @@ export const useRoutes = isAuthenticated => {
     }
     return(
         <Routes>
-            {/* <Route path='/' element={<AuthPage />} /> */}
+            <Route path='/' element={<Auth />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )

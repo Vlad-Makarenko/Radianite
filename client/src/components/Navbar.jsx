@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import {NavLink, useNavigate } from 'react-router-dom'
 import 'material-icons' 
-// import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../contexts/AuthContext'
 
 
 export const Navbar = () => {
 
-    // const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext)
     const history = useNavigate()
     const logoutHandler = event => {
         event.preventDefault();
-        // auth.logout();
+        auth.logout();
         history('/')
     }
 
@@ -23,8 +23,8 @@ export const Navbar = () => {
             {/* <li><NavLink to="/home">Home</NavLink></li> */}
             <li><NavLink to="/room">Create Room</NavLink></li>
             <li><NavLink to="/rules">Rules</NavLink></li>
-            <li><NavLink to="/profile"><i class="material-icons">person_pin</i></NavLink></li>
-            <li><a href='/' onClick={logoutHandler}><i class="material-icons">exit_to_app</i></a></li>
+            <li><NavLink to="/profile"><i className="material-icons">person_pin</i></NavLink></li>
+            <li><a href='/' onClick={logoutHandler}><i className="material-icons">exit_to_app</i></a></li>
           </ul>
         </div>
       </nav>
