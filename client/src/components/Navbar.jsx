@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import {NavLink, useNavigate } from 'react-router-dom'
+import 'material-icons' 
 // import { AuthContext } from '../context/AuthContext'
+
 
 export const Navbar = () => {
 
@@ -15,14 +17,14 @@ export const Navbar = () => {
 
     return (
         <nav >
-        <div className="nav-wrapper deep-purple accent-4" style={{padding: '0 2rem'}}>
-          <a href="/" className="brand-logo">Radianite</a>
+        <div className="nav-wrapper deep-purple accent-4" style={{paddingLeft: '1rem'}}>
+          <a href="/home" className="brand-logo">Radianite</a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><NavLink to="/create">Profile</NavLink></li>
-            <li><NavLink to="/links">Create Room</NavLink></li>
-            <li><NavLink to="/links">Rules</NavLink></li>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><a href='/' onClick={logoutHandler}>Log out</a></li>
+            {/* <li><NavLink to="/home">Home</NavLink></li> */}
+            <li><NavLink to="/room">Create Room</NavLink></li>
+            <li><NavLink to="/rules">Rules</NavLink></li>
+            <li><NavLink to="/profile"><i class="material-icons">person_pin</i></NavLink></li>
+            <li><a href='/' onClick={logoutHandler}><i class="material-icons">exit_to_app</i></a></li>
           </ul>
         </div>
       </nav>
