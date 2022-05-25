@@ -1,0 +1,26 @@
+.profileImage{
+    height:400px !important;
+    /* border-radius: 50% !important; */
+    /* width:400px !important; */
+}
+
+.profileBlockImage{
+    display:flex !important;
+    justify-content: center !important;
+    background-color:#d81b60 !important;  
+}
+
+.profileBlockContent{
+    background-color:#880e4f  !important;
+    color: white !important;
+}
+
+.userNickname{
+    font-weight: bold !important;
+    background-color: rgb(27, 28, 28);
+    /* background-size: 20px !important;  trying to make height smaller*/ 
+}
+
+.changeDescription{
+    background-color:#d81b60 !important;
+}

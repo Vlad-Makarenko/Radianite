@@ -23,7 +23,7 @@ export const Home = () => {
       <div className="col s6">nen</div>
       <Modal active={modalActive} setActive={setModalActive}>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
           aliquid molestiae. Asperiores cum vero reiciendis ipsam assumenda,
           vel, nesciunt molestiae impedit laborum dolorum at, distinctio quo et
           esse nostrum autem.

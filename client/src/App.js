@@ -9,8 +9,8 @@ import 'materialize-css'
 import './styles/App.css'
 import './styles/Card.css'
 
-import  { useState } from "react";
-import {Modal} from './components/UI/Modal'
+// import  { useState } from "react";
+// import {Modal} from './components/UI/Modal'
 
 function App() {
 
