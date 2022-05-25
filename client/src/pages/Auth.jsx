@@ -42,8 +42,8 @@ export const Auth = () => {
 
     return (
         <div className="row">
-      {/* <div className="col s6 offset-s3"> */}
-      <div style={{width: 500}}>
+      <div className="col s6 offset-s3">
+      {/* <div style={{width: 500}}> */}
        <b> <h1 style={{textAlign: 'center', color: '#d81b60', fontWeight: 'bold'}}>Radianite</h1></b>
         <div className="card pink darken-1">
           <div className="card-content white-text">
@@ -73,7 +73,7 @@ export const Auth = () => {
                   value={form.password}
                   onChange={changeHandler}
                 />
-                <label htmlFor="login">Пароль</label>
+                <label htmlFor="login">password</label>
               </div>
 
             </div>
