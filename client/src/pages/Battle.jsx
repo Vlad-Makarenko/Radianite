@@ -37,22 +37,32 @@ export const Battle = () => {
     <BattleContext.Provider
       value={{ userCards, setUserCards, oppCards, setOppCards, tableUserCards, setTableUserCards, tableOppCards, setTableOppCards, moveCard}}
     >
-      <div>
+    <div className="row">
+      <div className="col s6 offset-s3">
         <CardList
           classes={["CardList"]}
           side="Opponent"
           cards={oppCards}
           setPopupCard={noop}
         />
+      </div>
+
 
         {popupCard && <CardPopup popupCard={popupCard} />}
+      <div className="col s6 offset-s3">
+
         <Table setPopupCard={setPopupCard}/>
+      </div>
+
+      <div className="col s6 offset-s3">
+
         <CardList
           classes={["CardList"]}
           side="User"
           cards={userCards}
           setPopupCard={setPopupCard}
         />
+      </div>
       </div>
     </BattleContext.Provider>
   );

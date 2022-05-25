@@ -8,10 +8,10 @@
     background-image: url(../assets/CardBackground.png);
     background-size:cover;
     display: flex;
-    margin: 10px;
+    margin: 1%;
     border-radius: 15px;
-    width: 800px;
-    height: 140px;
+    width: 100%;
+    height: calc(100vh - 80vh);
 }
 
 
@@ -22,7 +22,7 @@
     
     border: 1px solid rgba(190, 240, 91, 0.742);
     display: flex;
-    margin: 10px;
+    margin: 1%;
     border-radius: 15px;
     width: calc(100% - 20px);
     height: calc(50% - 15px);
@@ -33,6 +33,6 @@
 }
 
 .User {
-    position:absolute;
+    /* position: ; */
     bottom:0;
 }
