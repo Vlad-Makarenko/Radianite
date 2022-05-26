@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import avatar from "../assets/newKuzya.jpg";
+import avatar1 from "../assets/newKuzya.jpg";
 import "../styles/Profile.css";
 import { Modal } from "../components/UI/Modal";
 import { useHttp } from "../hooks/http.hook";
@@ -11,15 +11,21 @@ export const Profile = () => {
   const [modalActive, setModalActive] = useState(false);
   const [descriptionMessage, setDescriptionMessage] = useState("");
   const [description, setDescription] = useState("");
+  const [avatar, setAvatar] = useState(avatar1);
+  const [userLogin, setUserLogin] = useState('');
+  const [userData, setUserData] = useState(null);
   const { loading, request } = useHttp();
 
-  const fetchData = useCallback( async () => {
+  const fetchData = useCallback(async () => {
     try {
       const data = await request("/api/user", "POST", { id: auth.userId });
       console.log(data);
+      setUserLogin(data.login);
+      setAvatar(data.avatar);
+      setDescription(data.description);
+      setUserData(data)
     } catch (e) {}
   }, [request, auth.userId]);
- 
 
   useEffect(() => {
     fetchData();
@@ -29,9 +35,14 @@ export const Profile = () => {
     setDescriptionMessage(event.target.value);
   };
 
-  const handleDescription = (event) => {
+  const handleDescription = async (event) => {
     event.preventDefault();
     setDescription(descriptionMessage);
+    try {
+      const data = await request("/api/user/update", "POST", { id: auth.userId, description: descriptionMessage, avatar: 'default.png' }); // TODO: Change avatar
+      console.log(data);
+    } catch (e) {}
+    setDescriptionMessage('');
     setModalActive(false);
     //add here *user_desction = descripion
   };
@@ -50,20 +61,26 @@ export const Profile = () => {
             <div className="card">
               <div className="card-image profileBlockImage">
                 <img className="profileImage" src={avatar} alt="avatar" />
-                <span className="card-title userNickname">Nickname</span>
+                <span className="card-title userNickname">
+                  {userLogin}
+                </span>
               </div>
-              <div className="card-content profileBlockContent">
-                <p> {description} </p>
-                <button
-                  // className="btn waves-effect waves-light changeDescription col s2 offset-s10"
-                  className="btn waves-effect waves-light changeDescription"
-                  name="action"
-                  onClick={() => {
-                    setModalActive(true);
-                  }}
-                >
-                  <i className="material-icons">create</i>
-                </button>
+              <div className="card-content profileBlockContent row">
+                <div className="col s10">
+                  <p> {description} </p>
+                </div>
+                <div className="col s2">
+                  <button
+                    // className="btn waves-effect waves-light changeDescription col s2 offset-s10"
+                    className="btn waves-effect waves-light changeDescription"
+                    name="action"
+                    onClick={() => {
+                      setModalActive(true);
+                    }}
+                  >
+                    <i className="material-icons">create</i>
+                  </button>
+                </div>
                 <Modal active={modalActive} setActive={setModalActive}>
                   <form>
                     <input
@@ -73,6 +90,7 @@ export const Profile = () => {
                       onChange={handleChangeDescriptionMessage}
                       value={descriptionMessage}
                       autoComplete="off"
+                      maxLength='128'
                     />
                     <button
                       className="btn waves-effect waves-light changeDescription"
@@ -80,7 +98,7 @@ export const Profile = () => {
                       name="action"
                       onClick={handleDescription}
                     >
-                      <i className="material-icons">cloud</i>
+                      Save
                     </button>
                   </form>
                 </Modal>

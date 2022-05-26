@@ -35,8 +35,8 @@ module.exports = class User {
     
     async save() {
         console.log(this);
-        if(await this.isExist()){
-            const query_str = `UPDATE user SET password='${this.password}' WHERE login='${this.login}';`;
+        if(await this.isExist(this.login)){
+            const query_str = `UPDATE user SET description='${this.description}', avatar='${this.avatar}' WHERE login='${this.login}';`;
             await conn.promise().query(query_str);
         } else {
             const query_str = `INSERT INTO user(login, password, description, avatar) VALUES('${this.login}', '${this.password}', '${this.description}', '${this.avatar}')`
