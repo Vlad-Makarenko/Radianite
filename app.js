@@ -11,7 +11,7 @@ const HOST = process.env.HOST || 'localhost';;
 app.use(express.json({ extended: true }));
 app.use('/api/card', require('./routes/card.routes'))
 app.use('/api/auth', require('./routes/auth.routes'))
-
+app.use('/api/user', require('./routes/user.routes'))
 
 
 
