@@ -16,7 +16,6 @@
 .Modal.active {
     opacity: 1;
     pointer-events: all;
-     
 }
 
 .ModalContainer {
@@ -31,5 +30,4 @@
 
 .ModalContainer.active {
     transform: scale(1);
-     
 }

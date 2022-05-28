@@ -80,7 +80,7 @@ export const Auth = () => {
           </div>
           <div className="card-action">
             <button
-              className="btn   purple darken-3"
+              className="btn waves-effect purple darken-3"
               style={{marginRight: 10}}
               disabled={loading}
               onClick={loginHandler}
@@ -88,7 +88,7 @@ export const Auth = () => {
               Login
             </button>
             <button
-              className="btn amber darken-3"
+              className="btn waves-effect amber darken-3"
               onClick={registerHandler}
               disabled={loading}
             >

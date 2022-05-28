@@ -64,7 +64,7 @@ export const Profile = () => {
   }
   return (
     <div className="row">
-      <div className="col s8 offset-s2">
+      <div className="col s8 offset-s2 Animation">
         {/*maybe add here s10/12 for profile description*/}
         <h3 className="TitleProfile"> User Profile</h3>
         <div className="row">
@@ -94,7 +94,18 @@ export const Profile = () => {
                     <i className="material-icons">create</i>
                   </button>
                 </div>
-                <Modal active={modalActive} setActive={setModalActive}>
+                {/* HERE! */}
+              </div>
+            </div>
+          </div>
+          <div className="col s7">
+            <div className="card-image profileBlockImage">
+              <p>Statistics</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal active={modalActive} setActive={setModalActive}>
                   <form className="row">
                     <div className="col s8 offset-s2">
                       <Select
@@ -126,16 +137,6 @@ export const Profile = () => {
                     </div>
                   </form>
                 </Modal>
-              </div>
-            </div>
-          </div>
-          <div className="col s7">
-            <div className="card-image profileBlockImage">
-              <p>Statistics</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

@@ -9,8 +9,8 @@ export const Table = ({ setPopupCard }) => {
 
   return (
     <div className="Table">
-      <CardList classes={["TableList"]} cards={tableOppCards} setPopupCard={setPopupCard} placement='true'/>
-      <CardList classes={["TableList"]} cards={tableUserCards} setPopupCard={setPopupCard} placement='true'/>
+      <CardList classes={["TableList"]}  side={"TOpponent"} cards={tableOppCards} setPopupCard={setPopupCard} placement='true'/>
+      <CardList classes={["TableList"]} side={"TUser"} cards={tableUserCards} setPopupCard={setPopupCard} placement='true'/>
     </div>
   );
 };

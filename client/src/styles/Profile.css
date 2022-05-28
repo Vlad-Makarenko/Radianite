@@ -1,59 +1,72 @@
-.TitleProfile{
-    text-align: center;
-    font-weight: bold;
-    color: #4dd0e1;
+.Animation {
+  opacity: 0;
+  animation: ani 1.5s forwards;
 }
 
-.profileImage{
-    height: 400px !important;
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.profileBlockImage{
-    display:flex !important;
-    justify-content: center !important;
-    background-color:#d81b60 !important;  
+.TitleProfile {
+  text-align: center;
+  font-weight: bold;
+  color: #4dd0e1;
 }
 
-.profileBlockContent{
-    background-color:#880e4f  !important;
-    color: white !important;
+.profileImage {
+  height: 400px !important;
 }
 
-.userNickname{
-    top: 0 !important;
-    height: 20%;
-    width: 100% !important; 
-    padding: 0px !important;
-    text-align: center;
-    font-size: 50px !important;
-    font-weight: bold !important;
-    background-color: rgba(27, 28, 28, 0.727);
-    /* background-size: 20px !important;  trying to make height smaller*/ 
+.profileBlockImage {
+  display: flex !important;
+  justify-content: center !important;
+  background-color: #d81b60 !important;
 }
 
-.changeDescription{
-    background-color:#d81b60 !important;
+.profileBlockContent {
+  background-color: #880e4f !important;
+  color: white !important;
 }
 
-.imgLable{
-    font-weight: bold !important;
-    font-size: 35px;
-    color: #afb42b;
-    margin-left: 15px;
+.userNickname {
+  top: 0 !important;
+  height: 20%;
+  width: 100% !important;
+  padding: 0px !important;
+  text-align: center;
+  font-size: 50px !important;
+  font-weight: bold !important;
+  background-color: rgba(27, 28, 28, 0.727);
+  /* background-size: 20px !important;  trying to make height smaller*/
 }
 
-.avatarImg{
-    height: 40px;
-    width: 40px;
+.changeDescription {
+  background-color: #d81b60 !important;
 }
 
-.selectContainer{
-    display: flex;
-    align-items: center;
+.imgLable {
+  font-weight: bold !important;
+  font-size: 35px;
+  color: #afb42b;
+  margin-left: 15px;
 }
 
-.formContainer{
-    display: flex;
-    justify-content: center;
+.avatarImg {
+  height: 40px;
+  width: 40px;
 }
 
+.selectContainer {
+  display: flex;
+  align-items: center;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
