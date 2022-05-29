@@ -13,12 +13,12 @@ export const useRoutes = isAuthenticated => {
     if (isAuthenticated){
         return(
             <Routes path>
-                <Route path='/home' element={<Home />} exact />                   
-                <Route path='/battle' element={<Battle />} exact />                    
+                <Route path='/' element={<Battle />} exact />                   
+                <Route path='/battle' element={<Home />} exact />                    
                 <Route path='/rules' element={<Rules />} exact />
                 <Route path='/profile' element={<Profile />} exact />
                 {/* <Route path='/battle/:id' element={<Battle />} exact /> */}
-                <Route path="*" element={<Navigate to="/battle" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         )
     }

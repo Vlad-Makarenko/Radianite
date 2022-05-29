@@ -23,7 +23,7 @@ export const Navbar = () => {
           <a href="/home" className="brand-logo">Radianite</a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             {/* <li><NavLink to="/home">Home</NavLink></li> */}
-            <li className='waves-effect'><NavLink to="/room">Create Room</NavLink></li>
+            <li className='waves-effect'><NavLink to="/battle">Battle</NavLink></li>
             <li className='waves-effect'><NavLink to="/rules">Rules</NavLink></li>
             <li className='waves-effect'><NavLink to="/profile"><i className="material-icons">person_pin</i></NavLink></li>
             <li className='waves-effect'><a href='/' onClick={logoutHandler}><i className="material-icons">exit_to_app</i></a></li>

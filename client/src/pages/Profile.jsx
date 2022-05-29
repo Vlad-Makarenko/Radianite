@@ -12,7 +12,7 @@ let currentAvatar = "";
 
 export const Profile = () => {
   const auth = useContext(AuthContext);
-  
+
   const [modalActive, setModalActive] = useState(false);
   const [descriptionMessage, setDescriptionMessage] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +21,6 @@ export const Profile = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const { loading, request } = useHttp();
-
 
   const fetchData = useCallback(async () => {
     try {
@@ -106,37 +105,37 @@ export const Profile = () => {
         </div>
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
-                  <form className="row">
-                    <div className="col s8 offset-s2">
-                      <Select
-                        defaultValue={selectedOption}
-                        onChange={setSelectedOption}
-                        options={options()}
-                        placeholder="Select avatar..."
-                      />
-                    </div>
-                    <div className="col s12">
-                      <h6>Description:</h6>
-                      <input
-                        placeholder="Enter Description"
-                        id="description"
-                        type="text"
-                        onChange={handleChangeDescriptionMessage}
-                        value={descriptionMessage}
-                        autoComplete="off"
-                        maxLength="128"
-                      />
-                      <button
-                        className="btn waves-effect waves-light changeDescription"
-                        type="submit"
-                        name="action"
-                        onClick={handleDescription}
-                      >
-                        Save
-                      </button>
-                    </div>
-                  </form>
-                </Modal>
+        <form className="row">
+          <div className="col s8 offset-s2">
+            <Select
+              defaultValue={selectedOption}
+              onChange={setSelectedOption}
+              options={options()}
+              placeholder="Select avatar..."
+            />
+          </div>
+          <div className="col s12">
+            <h6>Description:</h6>
+            <input
+              placeholder="Enter Description"
+              id="description"
+              type="text"
+              onChange={handleChangeDescriptionMessage}
+              value={descriptionMessage}
+              autoComplete="off"
+              maxLength="128"
+            />
+            <button
+              className="btn waves-effect waves-light changeDescription"
+              type="submit"
+              name="action"
+              onClick={handleDescription}
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
