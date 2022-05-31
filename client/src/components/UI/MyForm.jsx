@@ -41,7 +41,7 @@ export const MyForm = ({ action, form, changeHandler, loading, actionHandler }) 
               onClick={actionHandler}
               disabled={loading}
             >
-              Join
+              {action}
             </button>
           </div>
         </div>

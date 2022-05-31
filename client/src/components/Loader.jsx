@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const Loader = () => (
-  <div style={{display: 'flex', justifyContent: 'center', paddingTop: '2rem'}}>
+export const Loader = ({info}) => (
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
     <div className="preloader-wrapper active">
       <div className="spinner-layer spinner-red-only">
         <div className="circle-clipper left">
@@ -15,5 +15,6 @@ export const Loader = () => (
         </div>
       </div>
     </div>
+    <h1 className='white' >{info}</h1>
   </div>
 )

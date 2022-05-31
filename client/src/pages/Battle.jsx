@@ -1,69 +1,92 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { CardList } from "../components/CardList";
-import { CardPopup } from "../components/CardPopup";
-import { Loader } from "../components/Loader";
+import React, { useState, useEffect, useContext } from "react";
+import { useMessage } from "../hooks/message.hook";
 import { useHttp } from "../hooks/http.hook";
-import { useBattle } from "../hooks/battle.hook";
-import { BattleContext } from "../contexts/BattleContext";
-import { Table } from "../components/Table";
+import { Modal } from "../components/UI/Modal";
+import "../styles/Battle.css";
+import { MyForm } from "../components/UI/MyForm";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function noop() {}
 
 export const Battle = () => {
-  const [popupCard, setPopupCard] = useState(null); // TODO: обнулять взависимости от счетчика карт
-  const { request, loading } = useHttp();
-  const { userCards, setUserCards, oppCards, setOppCards, tableUserCards, setTableUserCards, tableOppCards, setTableOppCards, moveCard} = useBattle();
+  const [JmodalActive, setJModalActive] = useState(false);
+  const [CmodalActive, setCModalActive] = useState(false);
+  const history = useNavigate();
+  const auth = useContext(AuthContext);
 
-  const getCards = useCallback( async () => {
-    const data = await request("/api/card", "POST");
-    setUserCards(data);
-    setOppCards(data);
-    console.log(data); // TODO:
-  }, [setUserCards, setOppCards, request]);
+
+  const message = useMessage();
+  const { loading, request, error, clearError } = useHttp();
+
+  const [form, setForm] = useState({
+    name: "",
+    password: "",
+  });
 
   useEffect(() => {
-    getCards();
-  }, [getCards]);
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
 
-  useEffect( () => {
-    console.log("TABLE USER CARD: ", tableUserCards)
-  }, [tableUserCards])
+  useEffect(() => {
+    window.M.updateTextFields();
+  }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  const changeHandler = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const createHandler = async () => {
+    try {
+      const data = await request("/api/room/create", "POST", { ...form });
+      message(data.message);
+    } catch (e) {}
+  };
+
+  const joinHandler = async () => {
+    try {
+      const data = await request("/api/room/join", "POST", { ...form, id: auth.userId });
+      if (data.message === "ok") {
+        history("/rules"); // TODO: change path
+      } else {
+        message(data.message);
+      }
+    } catch (e) {}
+  };
 
   return (
-    <BattleContext.Provider
-      value={{ userCards, setUserCards, oppCards, setOppCards, tableUserCards, setTableUserCards, tableOppCards, setTableOppCards, moveCard}}
-    >
     <div className="row">
-      <div className="col s6 offset-s3">
-        <CardList
-          classes={["CardList"]}
-          side="Opponent"
-          cards={oppCards}
-          setPopupCard={noop}
+      <div className="col s6 center">
+        <div
+          className="createRoom waves-effect waves-light"
+          onClick={() => setCModalActive(true)}
+        ></div>
+      </div>
+      <div className="col s6 center">
+        <div
+          className="joinRoom waves-effect waves-light"
+          onClick={() => setJModalActive(true)}
+        ></div>
+      </div>
+      <Modal active={JmodalActive} setActive={setJModalActive}>
+        <MyForm
+          action={"Join Room!"}
+          form={form}
+          changeHandler={changeHandler}
+          loading={loading}
+          actionHandler={joinHandler}
         />
-      </div>
-
-
-        {popupCard && <CardPopup popupCard={popupCard} />}
-      <div className="col s6 offset-s3">
-
-        <Table setPopupCard={setPopupCard}/>
-      </div>
-
-      <div className="col s6 offset-s3">
-
-        <CardList
-          classes={["CardList"]}
-          side="User"
-          cards={userCards}
-          setPopupCard={setPopupCard}
+      </Modal>
+      <Modal active={CmodalActive} setActive={setCModalActive}>
+        <MyForm
+          action={"Create Room!"}
+          form={form}
+          changeHandler={changeHandler}
+          loading={loading}
+          actionHandler={createHandler}
         />
-      </div>
-      </div>
-    </BattleContext.Provider>
+      </Modal>
+    </div>
   );
 };
