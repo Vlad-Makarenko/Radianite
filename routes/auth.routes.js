@@ -12,8 +12,9 @@ router.post(
   "/register",
   [
     check("login", "Incorrect login").toLowerCase(),
-    check("password", "Minimum password length must be at least 6")
-      .isLength({ min: 6 }),
+    check("password", "Minimum password length must be at least 6").isLength({
+      min: 6,
+    }),
   ],
   async (req, res) => {
     try {
@@ -66,7 +67,7 @@ router.post(
 
       const { login, password } = req.body;
 
-      const user = await new User().findBy('login', login);
+      const user = await new User().findBy("login", login);
 
       if (!user) {
         return res.status(400).json({ message: "User not found" });
@@ -86,9 +87,7 @@ router.post(
 
       res.json({ token, userId: user.id });
     } catch (e) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong, try again" });
+      res.status(500).json({ message: "Something went wrong, try again" });
     }
   }
 );

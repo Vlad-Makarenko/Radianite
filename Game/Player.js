@@ -1,12 +1,12 @@
 // import { useMessage } from "../hooks/message.hook";
 
-module.export = class Player {
-  constructor(name, deck, socket, health = 30, radianite = 1) {
+module.exports = class Player {
+  constructor(name, socket, health = 30, radianite = 1) {
     this.name = name;
-    this.deck = deck;
     this.socket = socket;
     this.health = health;
     this.radianite = radianite;
+    this.deck = [];
     this.handCards = [];
   }
 
@@ -18,8 +18,8 @@ module.export = class Player {
       this.health += amount;
     }
 
-    if(this.health <= 0){
-        message ="You loose"; //rework
+    if (this.health <= 0) {
+      message = "You loose"; //rework
     }
   }
 
@@ -32,7 +32,7 @@ module.export = class Player {
     if (amount < temp) {
       temp -= amount;
     } else {
-      let message ="Not enough radianite";
+      let message = "Not enough radianite";
       return message;
     }
     return temp;
@@ -61,6 +61,4 @@ module.export = class Player {
       }
     }
   }
-
-
-}
+};

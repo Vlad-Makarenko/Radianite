@@ -4,21 +4,23 @@ import { BattleContext } from "../contexts/BattleContext";
 import "../styles/Card.css";
 
 export const Card = ({ card, setPopupCard, side, placement }) => {
-  const {moveCard} = useContext(BattleContext);
+  const { moveCard } = useContext(BattleContext);
 
   return (
-    
     <div
       onMouseEnter={() => setPopupCard(card)}
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
         moveCard(card, side);
-        setPopupCard(null)
+        setPopupCard(null);
       }}
       className={placement ? "TableCard" : "Card"}
     >
-      {placement ?  <MyCard classes={["CardOnTable", side]} card={card} /> :  <MyCard classes={["CardImg", side]} card={card} />}
-     
+      {placement ? (
+        <MyCard classes={["CardOnTable", side]} card={card} />
+      ) : (
+        <MyCard classes={["CardImg", side]} card={card} />
+      )}
     </div>
   );
 };

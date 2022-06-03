@@ -1,104 +1,102 @@
 .CardImg {
-    height: 85%;
-    border-radius: 10px;
-    margin-top: 13px;
-    transition: all .4s ease;
-    animation: appear 1s forwards;
+  height: 85%;
+  border-radius: 10px;
+  margin-top: 13px;
+  transition: all 0.4s ease;
+  animation: appear 1s forwards;
 }
 
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+@keyframes appear {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
 
 .CardOnTable {
-    height: 90%;
-    margin-top: 10px;
-    margin-left: 7px;
-    border-radius: 10px;
-    transition: all 1s ease;
+  height: 90%;
+  margin-top: 10px;
+  margin-left: 7px;
+  border-radius: 10px;
+  transition: all 1s ease;
 }
 
-.TableCard.tuser{
-    position: relative;
-    margin-left: 10px;
-    height: 100%;
+.TableCard.tuser {
+  position: relative;
+  margin-left: 10px;
+  height: 100%;
 }
 
-.tuser{
-    animation: appear 1s forwards;
+.tuser {
+  animation: appear 1s forwards;
 }
 
-.topponent{
-    animation: appear 1s forwards;
+.topponent {
+  animation: appear 1s forwards;
 }
 
 .tuser:hover {
-    transition: all .4s ease;
-    box-shadow:1px 1px 40px rgba(38, 255, 0, 0.5);
-    border: 1px dashed rgb(53, 212, 0);
+  transition: all 0.4s ease;
+  box-shadow: 1px 1px 40px rgba(38, 255, 0, 0.5);
+  border: 1px dashed rgb(53, 212, 0);
 }
 
-.topponent:hover{
-    transition: all .4s ease;
-    box-shadow:1px 1px 40px rgba(255, 0, 0, 0.5);
-    border: 1px dashed rgb(230, 0, 0);
+.topponent:hover {
+  transition: all 0.4s ease;
+  box-shadow: 1px 1px 40px rgba(255, 0, 0, 0.5);
+  border: 1px dashed rgb(230, 0, 0);
 }
 
 .Card {
-    position: relative;
-    flex-wrap: nowrap;
-    width: 75px;
-    height: 100%;
-    /* height: 85%; */
+  position: relative;
+  flex-wrap: nowrap;
+  width: 75px;
+  height: 100%;
+  /* height: 85%; */
 }
 
-.user:hover{
-    margin-top: -1%;
-    transition: all .4s ease;
+.user:hover {
+  margin-top: -1%;
+  transition: all 0.4s ease;
 }
 
-.user:active{
-    animation: disappear 1.5s forwards;
+.user:active {
+  animation: disappear 1.5s forwards;
 }
 
 @keyframes disappear {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  0% {
+    opacity: 1;
   }
-
-.user{
-    box-shadow:1px 1px 40px rgba(255, 238, 0, 0.5);
-    border: 1px solid rgb(97, 255, 58);
-    cursor: pointer;
-
+  100% {
+    opacity: 0;
+  }
 }
 
-.opponent{
-    box-shadow:1px 1px 40px rgba(255, 0, 0, 0.5);
-    border: 1px solid rgb(176, 4, 4);
-
+.user {
+  box-shadow: 1px 1px 40px rgba(255, 238, 0, 0.5);
+  border: 1px solid rgb(97, 255, 58);
+  cursor: pointer;
 }
 
-.popupImg{
-    height: 350px;
-    border-radius: 10px;
-    box-shadow:1px 1px 40px rgba(255, 0, 119, 0.5);
+.opponent {
+  box-shadow: 1px 1px 40px rgba(255, 0, 0, 0.5);
+  border: 1px solid rgb(176, 4, 4);
 }
 
-.popupCard{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
-    animation: appear .5s forwards;
+.popupImg {
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 40px rgba(255, 0, 119, 0.5);
+}
+
+.popupCard {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  animation: appear 0.5s forwards;
 }

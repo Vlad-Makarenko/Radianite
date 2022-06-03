@@ -9,17 +9,13 @@ import "materialize-css";
 import "./styles/App.css";
 import "./styles/Card.css";
 
-// import  { useState } from "react";
-// import {Modal} from './components/UI/Modal'
-
 function App() {
   const { token, login, logout, userId, ready } = useAuth();
   const isAuthenticated = !!token;
-  // const isAuthenticated = true;
   const routes = useRoutes(isAuthenticated);
 
   if (!ready) {
-    return <Loader info={'Loading...'} />;
+    return <Loader info={"Loading..."} />;
   }
 
   return (

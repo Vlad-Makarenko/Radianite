@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { useMessage } from "../hooks/message.hook";
 import { useHttp } from "../hooks/http.hook";
 import { Modal } from "../components/UI/Modal";
-import "../styles/Battle.css";
 import { MyForm } from "../components/UI/MyForm";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import "../styles/Battle.css";
 
 function noop() {}
 
@@ -14,7 +14,6 @@ export const Battle = () => {
   const [CmodalActive, setCModalActive] = useState(false);
   const history = useNavigate();
   const auth = useContext(AuthContext);
-
 
   const message = useMessage();
   const { loading, request, error, clearError } = useHttp();
@@ -46,9 +45,12 @@ export const Battle = () => {
 
   const joinHandler = async () => {
     try {
-      const data = await request("/api/room/join", "POST", { ...form, id: auth.userId });
+      const data = await request("/api/room/join", "POST", {
+        ...form,
+        id: auth.userId,
+      });
       if (data.message === "ok") {
-        history("/rules"); // TODO: change path
+        history(`/battle/${data.room.name}`); // TODO: change path
       } else {
         message(data.message);
       }

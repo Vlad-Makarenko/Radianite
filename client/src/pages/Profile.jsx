@@ -59,7 +59,7 @@ export const Profile = () => {
   };
 
   if (loading) {
-    return <Loader info={'Loading...'}/>;
+    return <Loader info={"Loading..."} />;
   }
   return (
     <div className="row">

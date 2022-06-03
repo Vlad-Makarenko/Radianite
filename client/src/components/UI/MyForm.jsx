@@ -1,6 +1,12 @@
 import React from "react";
 
-export const MyForm = ({ action, form, changeHandler, loading, actionHandler }) => {
+export const MyForm = ({
+  action,
+  form,
+  changeHandler,
+  loading,
+  actionHandler,
+}) => {
   return (
     <div className="row">
       <div className="col s10 offset-s1">
