@@ -2,18 +2,17 @@ const Player = require("./Player");
 const Card = require("../models/Card");
 
 module.exports = class Game {
+
   /**
    *
    * @param {Player} p1
    * @param {Player} p2
-   * @param {string} room
-   * @param {*} socket
    */
-  constructor(p1, p2, room, socket) {
+  constructor(p1, p2) {
     this.p1 = p1;
     this.p2 = p2;
-    this.room = room;
-    this.socket = socket;
+    this.gameInit();
+
   }
 
   async gameInit() {
@@ -24,5 +23,7 @@ module.exports = class Game {
     } catch (error) {
       console.error(error);
     }
+    this.p1.socket.to(this.p1.room).emit("startGame", {deck: this.p1.deck});
+    this.p2.socket.to(this.p2.room).emit("startGame", {deck: this.p2.deck});
   }
 };

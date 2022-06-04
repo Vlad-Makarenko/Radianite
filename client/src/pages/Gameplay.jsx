@@ -33,25 +33,24 @@ export const Gameplay = () => {
 
   const room = useParams().id;
 
-  socket.emit("initGame", { room, userId });
+  useEffect(() => {
+    socket.emit("initGame", { room, userId });
+  }, [room, userId]);
+
+  useEffect(() => {
+    socket.on("waiting", (data) => {
+      setWaiting(true);
+    });
+    socket.on("startGame", (data) => {
+      setUserCards(data.deck);
+      setOppCards(data.deck); //!!!!!!
+      setWaiting(false);
+    });
+  }, []);
 
   // TODO: 1.Добавить слушатели в сокетах на "вэйтинг" и показывать ладер
   //       2. добавить слушатель на "старт гейм" и создавать в нем класс гейм где будут реализованы последующие методы
 
-  // const getCards = useCallback( async () => {
-  //   const data = await request("/api/card", "POST");
-  //   setUserCards(data);
-  //   setOppCards(data);
-  //   console.log(data); // TODO:
-  // }, [setUserCards, setOppCards, request]);
-
-  // useEffect(() => {
-  //   getCards();
-  // }, [getCards]);
-
-  if (loading) {
-    return <Loader info={"Loading..."} />;
-  }
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
@@ -71,30 +70,32 @@ export const Gameplay = () => {
         moveCard,
       }}
     >
-      <div className="row">
-        <div className="col s6 offset-s3">
-          <CardList
-            classes={["CardList"]}
-            side="Opponent"
-            cards={oppCards}
-            setPopupCard={noop}
-          />
-        </div>
+      {!waiting && (
+        <div className="row pipec">
+          <div className="col s6 offset-s3">
+            <CardList
+              classes={["CardList"]}
+              side="Opponent"
+              cards={oppCards}
+              setPopupCard={noop}
+            />
+          </div>
 
-        {popupCard && <CardPopup popupCard={popupCard} />}
-        <div className="col s6 offset-s3">
-          <Table setPopupCard={setPopupCard} />
-        </div>
+          {popupCard && <CardPopup popupCard={popupCard} />}
+          <div className="col s6 offset-s3">
+            <Table setPopupCard={setPopupCard} />
+          </div>
 
-        <div className="col s6 offset-s3">
-          <CardList
-            classes={["CardList"]}
-            side="User"
-            cards={userCards}
-            setPopupCard={setPopupCard}
-          />
+          <div className="col s6 offset-s3">
+            <CardList
+              classes={["CardList"]}
+              side="User"
+              cards={userCards}
+              setPopupCard={setPopupCard}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </BattleContext.Provider>
   );
 };

@@ -1,9 +1,10 @@
 // import { useMessage } from "../hooks/message.hook";
 
 module.exports = class Player {
-  constructor(name, socket, health = 30, radianite = 1) {
+  constructor(name, socket, room, health = 30, radianite = 1) {
     this.name = name;
     this.socket = socket;
+    this.room = room;
     this.health = health;
     this.radianite = radianite;
     this.deck = [];

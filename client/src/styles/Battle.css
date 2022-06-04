@@ -4,6 +4,10 @@
   animation: appear 1.5s forwards;
 }
 
+.pipec{
+  animation: appear .5s forwards;
+}
+
 @keyframes appear {
   0% {
     opacity: 0;
