@@ -4,7 +4,7 @@ import { BattleContext } from "../contexts/BattleContext";
 import "../styles/Card.css";
 
 export const Card = ({ card, setPopupCard, side, placement }) => {
-  const { moveCard } = useContext(BattleContext);
+  const { moveCard, socket } = useContext(BattleContext);
 
   return (
     <div
@@ -12,6 +12,7 @@ export const Card = ({ card, setPopupCard, side, placement }) => {
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
         moveCard(card, side);
+        socket.emit("TestMove", card);
         setPopupCard(null);
       }}
       className={placement ? "TableCard" : "Card"}

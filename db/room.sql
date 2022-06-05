@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS room (
     player1 VARCHAR(255) DEFAULT NULL,
     player2 varchar(255) DEFAULT NULL,
     status ENUM('active', 'waiting') NOT NULL  DEFAULT 'waiting'
-);
+); 

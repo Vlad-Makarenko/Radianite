@@ -49,6 +49,8 @@ module.exports = (socket) => {
 
   // socket.on("startGame", (data) => {});
 
+
+
   socket.on("disconnect", () => {
     //TODO: NEED REMAKE & DEVELOPE
     waitingPlayers.filter((data) => data.socket.id !== socket.id);

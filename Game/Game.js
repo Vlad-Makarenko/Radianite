@@ -25,5 +25,12 @@ module.exports = class Game {
     }
     this.p1.socket.to(this.p1.room).emit("startGame", {deck: this.p1.deck});
     this.p2.socket.to(this.p2.room).emit("startGame", {deck: this.p2.deck});
+
+    this.p1.socket.on("TestMove", data => {
+      console.log(data);
+    })
+    this.p2.socket.on("TestMove", data => {
+      console.log(data);
+    })
   }
 };

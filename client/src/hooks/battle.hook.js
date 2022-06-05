@@ -26,7 +26,7 @@ export const useBattle = () => {
       userCards,
       oppCards,
       tableUserCards,
-      tableOppCards,
+      tableOppCards
     ]
   );
 

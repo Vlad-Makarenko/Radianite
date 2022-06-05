@@ -15,8 +15,8 @@ module.exports = class Player {
     //if heal: sign +; if attack: sign -
     if (sign == "-") {
       this.health -= amount;
-    } else {
-      this.health += amount;
+    } else { 
+      this.health += amount; 
     }
 
     if (this.health <= 0) {

@@ -2,7 +2,7 @@
 -- USE radianite;
 CREATE TABLE IF NOT EXISTS card (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     description varchar(255) NOT NULL,
     type ENUM('damage', 'defense') NOT NULL,
     power_points INT UNSIGNED NOT NULL,

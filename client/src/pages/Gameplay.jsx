@@ -7,6 +7,7 @@ import { useBattle } from "../hooks/battle.hook";
 import { BattleContext } from "../contexts/BattleContext";
 import { Table } from "../components/Table";
 import { useParams } from "react-router-dom";
+import Game from "../Game/Game"
 
 import io from "socket.io-client";
 import { AuthContext } from "../contexts/AuthContext";
@@ -19,19 +20,23 @@ export const Gameplay = () => {
   const [waiting, setWaiting] = useState(true);
   const { request, loading } = useHttp();
   const { userId } = useContext(AuthContext);
-  const {
-    userCards,
-    setUserCards,
-    oppCards,
-    setOppCards,
-    tableUserCards,
-    setTableUserCards,
-    tableOppCards,
-    setTableOppCards,
-    moveCard,
-  } = useBattle();
+  // const {
+  //   userCards,
+  //   setUserCards,
+  //   oppCards,
+  //   setOppCards,
+  //   tableUserCards,
+  //   setTableUserCards,
+  //   tableOppCards,
+  //   setTableOppCards,
+  //   moveCard,
+  // } = useBattle();
 
+  const state = useBattle();
+  state.socket = socket;
+  
   const room = useParams().id;
+
 
   useEffect(() => {
     socket.emit("initGame", { room, userId });
@@ -42,8 +47,13 @@ export const Gameplay = () => {
       setWaiting(true);
     });
     socket.on("startGame", (data) => {
-      setUserCards(data.deck);
-      setOppCards(data.deck); //!!!!!!
+      // setUserCards(data.deck);
+      const game = new Game('', '', '', state);
+      console.log(data);
+      console.log(data.deck);
+      game.states.setUserCards(data.deck);
+      game.states.setOppCards(data.deck); //!!!!!!
+      game.initHook();
       setWaiting(false);
     });
   }, []);
@@ -54,29 +64,30 @@ export const Gameplay = () => {
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
-  }
+  } else{
 
   return (
-    <BattleContext.Provider
-      value={{
-        userCards,
-        setUserCards,
-        oppCards,
-        setOppCards,
-        tableUserCards,
-        setTableUserCards,
-        tableOppCards,
-        setTableOppCards,
-        moveCard,
-      }}
+     <BattleContext.Provider
+      // value={{
+      //   userCards : game.states.userCards,
+      //   setUserCards,
+      //   oppCards,
+      //   setOppCards,
+      //   tableUserCards,
+      //   setTableUserCards,
+      //   tableOppCards,
+      //   setTableOppCards,
+      //   moveCard,
+      // }}
+      value={state}
     >
-      {!waiting && (
+      (
         <div className="row pipec">
           <div className="col s6 offset-s3">
             <CardList
               classes={["CardList"]}
               side="Opponent"
-              cards={oppCards}
+              cards={state.oppCards}
               setPopupCard={noop}
             />
           </div>
@@ -90,12 +101,13 @@ export const Gameplay = () => {
             <CardList
               classes={["CardList"]}
               side="User"
-              cards={userCards}
+              cards={state.userCards}
               setPopupCard={setPopupCard}
             />
           </div>
         </div>
-      )}
+      )
     </BattleContext.Provider>
-  );
+    );
+      }
 };

@@ -12,4 +12,5 @@ export const BattleContext = createContext({
   tableOppCards: [],
   setTableOppCards: noop,
   moveCard: noop,
+  socket: null
 });
