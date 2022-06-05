@@ -11,6 +11,16 @@ module.exports = class Player {
     this.handCards = [];
   }
 
+  sendData(){
+    this.socket.to(this.room).emit('playerInfo', {
+      health: this.health, 
+      name: this.name, 
+      handCards: this.handCards, 
+      radianite: this.radianite, 
+      deck: this.deck, 
+    })
+  }
+
   changeHealth(sign, amount) {
     //if heal: sign +; if attack: sign -
     if (sign == "-") {

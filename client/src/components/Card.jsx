@@ -11,9 +11,11 @@ export const Card = ({ card, setPopupCard, side, placement }) => {
       onMouseEnter={() => setPopupCard(card)}
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
-        moveCard(card, side);
-        socket.emit("TestMove", card);
-        setPopupCard(null);
+        if( side === "user"){
+          moveCard(card, side);
+          socket.emit("TestMove", card);
+          setPopupCard(null);
+        }
       }}
       className={placement ? "TableCard" : "Card"}
     >

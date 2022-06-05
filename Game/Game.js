@@ -11,11 +11,13 @@ module.exports = class Game {
   constructor(p1, p2) {
     this.p1 = p1;
     this.p2 = p2;
-    this.gameInit();
+    this.players = [p1, p2];
+    this.#gameInit();
+    this.#addEventListener();
 
   }
 
-  async gameInit() {
+  async #gameInit() {
     try {
       const cards = await Card.getAll();
       this.p1.deck = cards;
@@ -23,14 +25,33 @@ module.exports = class Game {
     } catch (error) {
       console.error(error);
     }
-    this.p1.socket.to(this.p1.room).emit("startGame", {deck: this.p1.deck});
-    this.p2.socket.to(this.p2.room).emit("startGame", {deck: this.p2.deck});
-
-    this.p1.socket.on("TestMove", data => {
-      console.log(data);
+    
+    this.players.forEach((data, index) => {
+      const opponent = this.players[(index + 1) % 2]
+      data.socket.to(data.room).emit("startGame", {player: data.name, opponent: opponent.name });
+      data.startHandCards(1);
     })
-    this.p2.socket.on("TestMove", data => {
-      console.log(data);
+
+    this.players.forEach((data, index) => {
+      const opponent = this.players[(index + 1) % 2]
+      data.sendData();
+      data.socket.to(data.room).emit('opponentInfo', {
+        health: opponent.health, 
+        name: opponent.name, 
+        handCards: opponent.handCards,  // TODO: Change this
+        radianite: opponent.radianite, 
+      })
+    })
+
+  }
+
+  #addEventListener(){
+    this.players.forEach((player, index) => {
+      const opponent = this.players[(index + 1) % 2]
+      player.socket.on("TestMove", data => {
+        console.log(data);
+        player.socket.to(player.room).emit("opponentTable",{cards: [data]}); //TODO: update handCards
+      })
     })
   }
 };
