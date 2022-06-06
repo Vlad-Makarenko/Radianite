@@ -75,10 +75,10 @@ export const Profile = () => {
                 <span className="card-title userNickname">{userLogin}</span>
               </div>
               <div className="card-content profileBlockContent row">
-                {/* <div className="col s1">
+                <div className="col s1">
                   <i className="material-icons">info_outline</i>
-                </div> */}
-                <div className="col s10">
+                </div>
+                <div className="col s9" style={{marginTop: '3px'}}>
                   <p> {description} </p>
                 </div>
                 <div className="col s2">

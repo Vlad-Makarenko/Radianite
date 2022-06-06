@@ -9,24 +9,35 @@ module.exports = class Player {
     this.radianite = radianite;
     this.deck = [];
     this.handCards = [];
+    this.tableCards = [];
   }
 
-  sendData(){
-    this.socket.to(this.room).emit('playerInfo', {
-      health: this.health, 
-      name: this.name, 
-      handCards: this.handCards, 
-      radianite: this.radianite, 
-      deck: this.deck, 
-    })
+  sendData() {
+    this.socket.emit("playerInfo", {
+      health: this.health,
+      name: this.name,
+      handCards: this.handCards,
+      radianite: this.radianite,
+      deck: this.deck,
+    });
+  }
+
+  changeHandCards(data) {
+    this.handCards = this.handCards.filter((card) => card.id !== data.id);
+    this.socket.emit("updateHandCards", { cards: this.handCards });
+  }
+
+  changeTableCards(data) {
+    this.tableCards.push(data);
+    this.socket.emit("updateUserTableCards", { cards: this.tableCards });
   }
 
   changeHealth(sign, amount) {
     //if heal: sign +; if attack: sign -
     if (sign == "-") {
       this.health -= amount;
-    } else { 
-      this.health += amount; 
+    } else {
+      this.health += amount;
     }
 
     if (this.health <= 0) {

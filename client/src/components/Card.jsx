@@ -12,8 +12,8 @@ export const Card = ({ card, setPopupCard, side, placement }) => {
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
         if( side === "user"){
-          moveCard(card, side);
-          socket.emit("TestMove", card);
+          // moveCard(card, side);
+          socket.emit("moveCard", card);
           setPopupCard(null);
         }
       }}

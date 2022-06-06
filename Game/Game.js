@@ -2,7 +2,6 @@ const Player = require("./Player");
 const Card = require("../models/Card");
 
 module.exports = class Game {
-
   /**
    *
    * @param {Player} p1
@@ -14,7 +13,6 @@ module.exports = class Game {
     this.players = [p1, p2];
     this.#gameInit();
     this.#addEventListener();
-
   }
 
   async #gameInit() {
@@ -25,33 +23,42 @@ module.exports = class Game {
     } catch (error) {
       console.error(error);
     }
-    
+
     this.players.forEach((data, index) => {
-      const opponent = this.players[(index + 1) % 2]
-      data.socket.to(data.room).emit("startGame", {player: data.name, opponent: opponent.name });
+      const opponent = this.players[(index + 1) % 2];
+      data.socket.emit("startGame", {
+        player: data.name,
+        opponent: opponent.name,
+      });
       data.startHandCards(1);
-    })
+    });
 
     this.players.forEach((data, index) => {
-      const opponent = this.players[(index + 1) % 2]
+      const opponent = this.players[(index + 1) % 2];
       data.sendData();
-      data.socket.to(data.room).emit('opponentInfo', {
-        health: opponent.health, 
-        name: opponent.name, 
-        handCards: opponent.handCards,  // TODO: Change this
-        radianite: opponent.radianite, 
-      })
-    })
-
+      data.socket.emit("opponentInfo", {
+        health: opponent.health,
+        name: opponent.name,
+        handCards: opponent.handCards, // TODO: Change this
+        radianite: opponent.radianite,
+      });
+    });
   }
 
-  #addEventListener(){
+  #addEventListener() {
     this.players.forEach((player, index) => {
-      const opponent = this.players[(index + 1) % 2]
-      player.socket.on("TestMove", data => {
-        console.log(data);
-        player.socket.to(player.room).emit("opponentTable",{cards: [data]}); //TODO: update handCards
-      })
-    })
+      const opponent = this.players[(index + 1) % 2];
+      player.socket.on("moveCard", (data) => {
+        player.changeHandCards(data);
+        player.changeTableCards(data);
+        // opponent.socket.emit("updateOpponentCards",  { cards: player.handCards })
+        player.socket
+          .to(player.room)
+          .emit("updateOpponentCards", { cards: player.handCards });
+        player.socket
+          .to(player.room)
+          .emit("updateOpponentTableCards", { cards: player.tableCards }); //TODO: update handCards
+      });
+    });
   }
 };

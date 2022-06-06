@@ -87,7 +87,7 @@
 }
 
 .popupImg {
-  height: 350px;
+  height: 33vh;
   border-radius: 10px;
   box-shadow: 1px 1px 40px rgba(255, 0, 119, 0.5);
 }
@@ -96,7 +96,7 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 50px;
-  left: 50px;
+  bottom: 3vh;
+  left: 2vw;
   animation: appear 0.5s forwards;
 }

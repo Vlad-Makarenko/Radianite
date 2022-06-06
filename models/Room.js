@@ -39,7 +39,6 @@ module.exports = class Room {
   }
 
   async save() {
-    console.log(this);
     if (await this.isExist()) {
       const query_str = `UPDATE room SET player1='${this.player1}', player2='${this.player2}', status='${this.status}' WHERE name='${this.name}'`;
       await conn.promise().query(query_str);
