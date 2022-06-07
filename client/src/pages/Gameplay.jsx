@@ -9,16 +9,23 @@ import { useParams } from "react-router-dom";
 import Game from "../Game/Game";
 import Player from "../Game/Player";
 
+import "../styles/Gameplay.css"
+
 import io from "socket.io-client";
 import { AuthContext } from "../contexts/AuthContext";
 const socket = io("http://localhost:5000");
 
 function noop() {}
 
+function changeTurn(){
+ socket.emit("changeTurn");
+}
+
 export const Gameplay = () => {
   const [popupCard, setPopupCard] = useState(null); // TODO: обнулять взависимости от счетчика карт
   const [waiting, setWaiting] = useState(true);
   const { userId } = useContext(AuthContext);
+  const [turn, setTurn] = useState(false);
   // const {
   //   userCards,
   //   setUserCards,
@@ -47,10 +54,18 @@ export const Gameplay = () => {
     socket.on("startGame", (data) => {
       const player = new Player(data.player);
       const opponent = new Player(data.opponent);
-      const game = new Game(player, socket, opponent, state);
+      const game = new Game(player, socket, opponent, state)
+      setTurn(data.turn);
+      console.log(data.turn);
       setWaiting(false);
     });
   }, [state]);
+
+  useEffect(() => {
+    socket.on("changeTurn", (data) =>{
+      setTurn(data.turn);
+    })
+  }, [])
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
@@ -71,7 +86,8 @@ export const Gameplay = () => {
       // }}
       value={state}
     >
-      <div className="row pipec">
+      {/* {number == 1 && <div className="row pipec"> */}
+      <div className="row">
         <div className="col s6 offset-s3">
           <CardList
             classes={["CardList"]}
@@ -88,12 +104,23 @@ export const Gameplay = () => {
 
         <div className="col s6 offset-s3">
           <CardList
-            classes={["CardList"]}
+            // classes={["CardList"]}
+            classes={turn? ["CardList"] : ["CardList", "disabledTurn"]}
             side="User"
             cards={state.userCards}
             setPopupCard={setPopupCard}
           />
         </div>
+        <div className="col s3">
+                  <button
+                    // className="btn waves-effect waves-light changeDescription col s2 offset-s10"
+                    className="btn waves-effect waves-light changeDescription"
+                    name="action"
+                    onClick={changeTurn}//? ()??
+                  >
+                    End turn
+                  </button>
+                </div>
       </div>
     </BattleContext.Provider>
   );

@@ -38,7 +38,12 @@ module.exports = (socket) => {
     const game = checkPair(member);
     if(!game){
       socket.to(data.room).emit('waiting');
+    } else { 
+      // // Between 1 and max(2)
+      // let number = Math.floor(Math.random() * 2) + 1;
+      // socket.to(data.room).emit('')
     }
+
     // TODO: 1. Проверять что если уже два юзера на одну комнату то эмитить "старт гейм" обом юзерам и создавать класс гейм
     //          (ВОЗМОЖНО в конструкторе уже эмитить старт гейм что бы сразу отдать туда карты и тд инфу..)
     //       2. Если же только один юзер то эмитить "вэйтинг" и на клиенете ставить лоадер в ожидание опонента

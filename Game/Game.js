@@ -24,11 +24,21 @@ module.exports = class Game {
       console.error(error);
     }
 
+    // Between 1 and max(2)
+    let resTurn = Math.floor(Math.random() * 2) + 1;
+    if (resTurn == 1) {
+      this.p1.turn = true;
+    } else {
+      this.p2.turn = true;
+    }
+
     this.players.forEach((data, index) => {
       const opponent = this.players[(index + 1) % 2];
+      
       data.socket.emit("startGame", {
         player: data.name,
         opponent: opponent.name,
+        turn: data.turn,
       });
       data.startHandCards(1);
     });
@@ -48,6 +58,12 @@ module.exports = class Game {
   #addEventListener() {
     this.players.forEach((player, index) => {
       const opponent = this.players[(index + 1) % 2];
+      player.socket.on("changeTurn", () =>{
+       player.turn = !player.turn;
+       opponent.turn = !opponent.turn;
+       opponent.socket.emit("changeTurn", {turn: opponent.turn});
+       player.socket.emit("changeTurn", {turn: player.turn});
+      })
       player.socket.on("moveCard", (data) => {
         player.changeHandCards(data);
         player.changeTableCards(data);
