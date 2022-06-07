@@ -4,7 +4,7 @@ import { BattleContext } from "../contexts/BattleContext";
 import "../styles/Card.css";
 
 export const Card = ({ card, setPopupCard, side, placement }) => {
-  const { moveCard, socket } = useContext(BattleContext);
+  const { socket } = useContext(BattleContext);
 
   return (
     <div
@@ -12,7 +12,6 @@ export const Card = ({ card, setPopupCard, side, placement }) => {
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
         if( side === "user"){
-          // moveCard(card, side);
           socket.emit("moveCard", card);
           setPopupCard(null);
         }

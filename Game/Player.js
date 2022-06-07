@@ -1,10 +1,11 @@
 // import { useMessage } from "../hooks/message.hook";
 
 module.exports = class Player {
-  constructor(name, socket, room, health = 30, radianite = 1) {
+  constructor(name, socket, room, avatar, health = 30, radianite = 1) {
     this.name = name;
     this.socket = socket;
     this.room = room;
+    this.avatar = avatar;
     this.health = health;
     this.radianite = radianite;
     this.deck = [];
@@ -19,6 +20,7 @@ module.exports = class Player {
       handCards: this.handCards,
       radianite: this.radianite,
       deck: this.deck,
+      avatar: this.avatar,
     });
   }
 

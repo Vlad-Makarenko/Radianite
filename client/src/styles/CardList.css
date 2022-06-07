@@ -1,13 +1,13 @@
 .CardList {
   /* position: relative; */
   display: flex;
-  flex-wrap: nowrap;
   justify-content: center;
   /* background-color: bisque; */
   border: 1px solid bisque;
-  background-image: url(../assets/CardBackground.png);
+  /* background-image: url(../assets/CardBackground1.png); */
+  /* background-image: url(../assets/CardBackground2.png); */
+  background-image: url(../assets/CardBackground3.png);
   background-size: cover;
-  display: flex;
   margin: 1%;
   border-radius: 15px;
   width: 100%;

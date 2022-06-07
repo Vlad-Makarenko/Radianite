@@ -9,6 +9,7 @@ async function addWaitingPlayers(userId, socket, room) {
   if (user) {
     const member = {
       login: user.login,
+      avatar: user.avatar,
       socket: socket,
       room: room,
     };
@@ -21,8 +22,8 @@ function checkPair(data){
   let result = null;
   waitingPlayers.forEach(member => {
     if(member.room === data.room && member.login !== data.login){
-      const p1 = new Player(member.name, member.socket, member.room)
-      const p2 = new Player(data.name, data.socket, data.room)
+      const p1 = new Player(member.login, member.socket, member.room, member.avatar)
+      const p2 = new Player(data.login, data.socket, data.room, data.avatar)
       result = new Game(p1, p2);
     }
   })

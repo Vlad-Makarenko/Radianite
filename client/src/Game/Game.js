@@ -28,6 +28,23 @@ export default class Game {
   //   setTableOppCards,
   //   moveCard,
 
+  // userRadianitePoints,
+  // setUserRadianitePoints,
+  // userHitPoints,
+  // setUserHitPoints,
+  // opponentRadianitePoints,
+  // setOpponentRadianitePoints,
+  // opponentHitPoints,
+  // setOpponentHitPoints,
+  // userAvatar,
+  // setUserAvatar,
+  // opponentAvatar,
+  // setOpponentAvatar,
+  // userLogin,
+  // setUserLogin,
+  // opponentLogin,
+  // setOpponentLogin,
+
   #addEventListener() {
     this.socket.on("playerInfo", (data) => {
       this.player.health = data.health;
@@ -36,6 +53,12 @@ export default class Game {
       this.player.radianite = data.radianite;
       this.player.deck = data.deck;
 
+      console.log("User avatar: ", data.avatar)
+
+      this.states.setUserLogin(this.player.name)
+      this.states.setUserHitPoints(this.player.health)
+      this.states.setUserRadianitePoints(this.player.radianite)
+      this.states.setUserAvatar(data.avatar)
       this.states.setUserCards(this.player.handCards);
     });
 
@@ -45,6 +68,10 @@ export default class Game {
       this.opponent.name = data.name;
       this.opponent.radianite = data.radianite;
 
+      this.states.setOpponentLogin(this.opponent.name)
+      this.states.setOpponentHitPoints(this.opponent.health)
+      this.states.setOpponentRadianitePoints(this.opponent.radianite)
+      this.states.setOpponentAvatar(data.avatar)
       this.states.setOppCards(this.opponent.handCards);
     });
 

@@ -41,6 +41,7 @@ module.exports = class Game {
         name: opponent.name,
         handCards: opponent.handCards, // TODO: Change this
         radianite: opponent.radianite,
+        avatar: opponent.avatar
       });
     });
   }

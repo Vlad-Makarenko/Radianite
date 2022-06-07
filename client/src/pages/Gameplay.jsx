@@ -11,6 +11,8 @@ import Player from "../Game/Player";
 
 import io from "socket.io-client";
 import { AuthContext } from "../contexts/AuthContext";
+import { BattleProfile } from "../components/BattleProfile";
+import { useBattleProfile } from "../hooks/battleProfile.hook";
 const socket = io("http://localhost:5000");
 
 function noop() {}
@@ -19,6 +21,7 @@ export const Gameplay = () => {
   const [popupCard, setPopupCard] = useState(null); // TODO: обнулять взависимости от счетчика карт
   const [waiting, setWaiting] = useState(true);
   const { userId } = useContext(AuthContext);
+  const battleInfo = useBattleProfile();
   // const {
   //   userCards,
   //   setUserCards,
@@ -45,12 +48,14 @@ export const Gameplay = () => {
       setWaiting(true);
     });
     socket.on("startGame", (data) => {
+      // battleInfo.setOpponentLogin(data.opponent)
+      // battleInfo.setUserLogin(data.player)
       const player = new Player(data.player);
       const opponent = new Player(data.opponent);
-      const game = new Game(player, socket, opponent, state);
+      const game = new Game(player, socket, opponent, {...state, ...battleInfo});
       setWaiting(false);
     });
-  }, [state]);
+  }, [state, battleInfo]);
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
@@ -80,6 +85,14 @@ export const Gameplay = () => {
             setPopupCard={noop}
           />
         </div>
+        <div className="col s3">
+          <BattleProfile
+            Avatar={battleInfo.opponentAvatar}
+            HP={battleInfo.opponentHitPoints}
+            RP={battleInfo.opponentRadianitePoints}
+            Login={battleInfo.opponentLogin}
+          />
+        </div>
 
         {popupCard && <CardPopup popupCard={popupCard} />}
         <div className="col s6 offset-s3">
@@ -92,6 +105,14 @@ export const Gameplay = () => {
             side="User"
             cards={state.userCards}
             setPopupCard={setPopupCard}
+          />
+        </div>
+        <div className="col s3">
+          <BattleProfile
+            Avatar={battleInfo.userAvatar}
+            HP={battleInfo.userHitPoints}
+            RP={battleInfo.userRadianitePoints}
+            Login={battleInfo.userLogin}
           />
         </div>
       </div>
