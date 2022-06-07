@@ -12,6 +12,7 @@ export const CardList = ({ classes, side, setPopupCard, cards, placement }) => {
           key={index}
           placement={placement}
           setPopupCard={setPopupCard}
+          turn={classes.includes('disabledTurn')}     
         />
       ))}
     </div>

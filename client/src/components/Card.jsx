@@ -3,7 +3,7 @@ import { MyCard } from "../components/UI/MyCard";
 import { BattleContext } from "../contexts/BattleContext";
 import "../styles/Card.css";
 
-export const Card = ({ card, setPopupCard, side, placement }) => {
+export const Card = ({ card, setPopupCard, side, placement, turn }) => {
   const { socket } = useContext(BattleContext);
 
   return (
@@ -11,7 +11,7 @@ export const Card = ({ card, setPopupCard, side, placement }) => {
       onMouseEnter={() => setPopupCard(card)}
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
-        if( side === "user"){
+        if( side === "user" && !turn){
           socket.emit("moveCard", card);
           setPopupCard(null);
         }

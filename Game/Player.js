@@ -11,6 +11,7 @@ module.exports = class Player {
     this.deck = [];
     this.handCards = [];
     this.tableCards = [];
+    this.turn = false;
   }
 
   sendData() {
