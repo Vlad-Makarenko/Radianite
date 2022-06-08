@@ -53,7 +53,6 @@ export default class Game {
       this.player.radianite = data.radianite;
       this.player.deck = data.deck;
 
-      console.log("User avatar: ", data.avatar)
 
       this.states.setUserLogin(this.player.name)
       this.states.setUserHitPoints(this.player.health)

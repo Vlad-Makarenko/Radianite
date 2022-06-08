@@ -20,8 +20,7 @@
 }
 
 .TurnBlock {
-    padding-bottom: 3% !important;
-
+  padding-bottom: 3% !important;
   height: 25%;
   width: 100%;
   display: flex;
@@ -30,23 +29,28 @@
   font-size: 3vh;
 }
 
-.TextInfBlock{
-    padding-top: 3% !important;
-    height: 25%;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    font-size: 3vh;
+.TurnButton {
+  height: 50% !important;
+  align-items: center !important;
+  padding-top: 0 !important;
 }
 
+.TextInfBlock {
+  padding-top: 3% !important;
+  height: 25%;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 3vh;
+}
 
 .UserTimer {
-    height: 25%;
-    width: 100%;
-    font-size: 5vh;
-    color: greenyellow;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  height: 25%;
+  width: 100%;
+  font-size: 5vh;
+  color: greenyellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -9,10 +9,7 @@ import RPIcon from "../assets/Radianite_Points.png";
 export const BattleProfile = ({ Login, RP, HP, Avatar }) => {
   const [avatar, setAvatar] = useState(defaultAvatar);
 
-
   useEffect(() => {
-    console.log("Battle avatar: ", Avatar)
-
     chooseAvatar(Avatar, setAvatar, Login);
   }, [Avatar, Login, setAvatar]);
 
@@ -28,12 +25,12 @@ export const BattleProfile = ({ Login, RP, HP, Avatar }) => {
         <div className="col s6 HpProfileBlock">
           <img className="ImgInfoProfileBlock" src={HPIcon} alt="HP" />
           <span> - {HP} </span>
-          <span className="HP">{'Hp'}</span>
+          <span className="HP">{"Hp"}</span>
         </div>
         <div className="col s6 RpProfileBlock">
           <img className="ImgInfoProfileBlock" src={RPIcon} alt="RP" />
           <span> - {RP} </span>
-          <span className="RP">{'RP'}</span>
+          <span className="RP">{"RP"}</span>
         </div>
       </div>
     </div>

@@ -54,7 +54,6 @@ export const Gameplay = () => {
         ...battleInfo,
       });
       setTurn(data.turn);
-      console.log(data.turn);
       setWaiting(false);
     });
 
@@ -92,9 +91,14 @@ export const Gameplay = () => {
           <Table setPopupCard={setPopupCard} />
         </div>
         <div className="col s3">
-          <InfoBlock oppTimer="00:10" userTimer="00:10" action={changeTurn} turn={turn} />
+          <InfoBlock
+            oppTimer="00:10"
+            userTimer="00:10"
+            action={changeTurn}
+            turn={turn}
+          />
         </div>
-        
+
         <div className="col s6 offset-s3">
           <CardList
             classes={turn ? ["CardList"] : ["CardList", "disabledTurn"]}

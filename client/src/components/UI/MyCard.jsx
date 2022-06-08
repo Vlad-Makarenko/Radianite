@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { chooseCard } from "../../tools/card";
 import "../../styles/Card.css";
 
-import devour from "../../assets/cards/Devour.png";
 import shirt from "../../assets/cards/Shirt.png";
 
 export const MyCard = ({ card, classes }) => {
-  let displayName = shirt;
-  if (!classes.includes("opponent")) {
-    switch (card?.name) {
-      case "Devour.png":
-        displayName = devour;
-        break;
-      default:
-        displayName = shirt;
-        break;
+  const [displayName, setDisplayName] = useState(shirt);
+
+  useEffect(() => {
+    if (!classes.includes("opponent")) {
+      chooseCard(card, setDisplayName);
     }
-  }
+  }, [card, classes]);
 
   return <img className={classes.join(" ")} src={displayName} alt="" />;
 };
