@@ -130,10 +130,11 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
 });
-
+ 
 connection.connect(async (err) => {
   if (err) {
-    console.log(err);
+    console.log('\n\nCREATE "radianite" DATABASE BEFORE THE START!\nIt\'s enough to run the following command: \'node db/radianite.js\'\n\n')
+    console.error(err);
     return err;
   } else {
     for (let i = 0; i < query_strs.length; i++) {
