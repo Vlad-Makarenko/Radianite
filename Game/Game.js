@@ -34,7 +34,7 @@ module.exports = class Game {
 
     this.players.forEach((data, index) => {
       const opponent = this.players[(index + 1) % 2];
-      
+
       data.socket.emit("startGame", {
         player: data.name,
         opponent: opponent.name,
@@ -51,7 +51,7 @@ module.exports = class Game {
         name: opponent.name,
         handCards: opponent.handCards, // TODO: Change this
         radianite: opponent.radianite,
-        avatar: opponent.avatar
+        avatar: opponent.avatar,
       });
     });
   }
@@ -59,12 +59,14 @@ module.exports = class Game {
   #addEventListener() {
     this.players.forEach((player, index) => {
       const opponent = this.players[(index + 1) % 2];
-      player.socket.on("changeTurn", () =>{
-       player.turn = !player.turn;
-       opponent.turn = !opponent.turn;
-       opponent.socket.emit("changeTurn", {turn: opponent.turn});
-       player.socket.emit("changeTurn", {turn: player.turn});
-      })
+
+      player.socket.on("changeTurn", () => {
+        player.turn = !player.turn;
+        opponent.turn = !opponent.turn;
+        opponent.socket.emit("changeTurn", { turn: opponent.turn });
+        player.socket.emit("changeTurn", { turn: player.turn });
+      });
+
       player.socket.on("moveCard", (data) => {
         player.changeHandCards(data);
         player.changeTableCards(data);
@@ -75,6 +77,12 @@ module.exports = class Game {
         player.socket
           .to(player.room)
           .emit("updateOpponentTableCards", { cards: player.tableCards }); //TODO: update handCards
+      });
+
+      player.socket.on("GiveUp", (data) => {
+        //TODO: Delete/Clear Socket
+        player.socket.emit("gameOver", { result: "lose" });
+        opponent.socket.emit("gameOver", { result: "win" });
       });
     });
   }

@@ -1,20 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 
 import { CardList } from "../components/CardList";
 import { CardPopup } from "../components/CardPopup";
 import { Loader } from "../components/Loader";
-import { useBattle } from "../hooks/battle.hook";
-import { BattleContext } from "../contexts/BattleContext";
 import { Table } from "../components/Table";
-import { AuthContext } from "../contexts/AuthContext";
 import { BattleProfile } from "../components/BattleProfile";
+import { InfoBlock } from "../components/InfoBlock";
+import { GiveUp } from "../components/GiveUp";
+import { Result } from "../components/Result";
+
+import { AuthContext } from "../contexts/AuthContext";
+import { BattleContext } from "../contexts/BattleContext";
+
+import { useBattle } from "../hooks/battle.hook";
 import { useBattleProfile } from "../hooks/battleProfile.hook";
 
 import Game from "../Game/Game";
 import Player from "../Game/Player";
-import { InfoBlock } from "../components/InfoBlock";
 
 const socket = io("http://localhost:5000");
 
@@ -23,9 +27,12 @@ function noop() {}
 export const Gameplay = () => {
   const { userId } = useContext(AuthContext);
 
-  const [popupCard, setPopupCard] = useState(null); // TODO: обнулять взависимости от счетчика карт
+  const [popupCard, setPopupCard] = useState(null);
+  const [result, setResult] = useState();
+  const [resaltActive, setResaltActive] = useState(false);
   const [waiting, setWaiting] = useState(true);
   const [turn, setTurn] = useState(false);
+  const history = useNavigate();
 
   const battleInfo = useBattleProfile();
   const state = useBattle();
@@ -60,7 +67,16 @@ export const Gameplay = () => {
     socket.on("changeTurn", (data) => {
       setTurn(data.turn);
     });
-  }, [state, battleInfo]);
+
+    socket.on("gameOver", (data) => {
+      setResult(data.result);
+      setResaltActive(true);
+      setTimeout(() => {
+        setResaltActive(false);
+        history("/battle");
+      }, 3000);
+    });
+  }, [state, battleInfo, history]);
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
@@ -69,7 +85,10 @@ export const Gameplay = () => {
   return (
     <BattleContext.Provider value={state}>
       <div className="row">
-        <div className="col s6 offset-s3">
+        <div className="col s3">
+          {!resaltActive && <GiveUp socket={socket} />}
+        </div>
+        <div className="col s6">
           <CardList
             classes={["CardList"]}
             side="Opponent"
@@ -115,6 +134,11 @@ export const Gameplay = () => {
             Login={battleInfo.userLogin}
           />
         </div>
+        <Result
+          active={resaltActive}
+          setActive={setResaltActive}
+          status={result}
+        />
       </div>
     </BattleContext.Provider>
   );

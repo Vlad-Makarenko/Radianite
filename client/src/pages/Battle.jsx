@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useMessage } from "../hooks/message.hook";
 import { useHttp } from "../hooks/http.hook";
+
+import { AuthContext } from "../contexts/AuthContext";
+
 import { Modal } from "../components/UI/Modal";
 import { MyForm } from "../components/UI/MyForm";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
-import "../styles/Battle.css";
 
-function noop() {}
+import "../styles/Battle.css";
 
 export const Battle = () => {
   const [JmodalActive, setJModalActive] = useState(false);
