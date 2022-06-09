@@ -40,7 +40,7 @@ module.exports = class Game {
         opponent: opponent.name,
         turn: data.turn,
       });
-      data.startHandCards(3);
+      data.startHandCards(6);
     });
 
     this.players.forEach((data, index) => {

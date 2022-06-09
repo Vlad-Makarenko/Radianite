@@ -62,6 +62,68 @@ query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Omen.png', 'This card provides protection against 1 damage', 'defense', 1, 1, 'public');"
 );
 
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SageHeal.png', 'Heals player in amount of 12 hp', 'heal', 12, 5, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('ReynaHeal.png', 'Heals player in amount of 9 hp', 'heal', 9, 4, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixHeal.png', 'Heals player in amount of 6 hp', 'heal', 6, 3, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SkyeHeal.png', 'Heals player in amount of 4 hp', 'heal', 4, 2, 'public');"
+);
+
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('ViperSmoke.png', 'with chance of 60% all damage will be ignored', 'smoke', 60, 4, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('OmenSmoke.png', 'with chance of 40% all damage will be ignored', 'smoke', 40, 3, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('BrimSmoke.png', 'with chance of 30% all damage will be ignored', 'smoke', 30, 2, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('JettSmoke.png', 'with chance of 13% all damage will be ignored', 'smoke', 13, 1, 'secret');"
+);
+
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 4, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('ReynaFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 4, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('KayoFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 3, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('BreachFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 3, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SkyeFlash.png', '30% of damage will be returned to opponent with 20% chance', 'flash', 30, 2, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('YoruFlash.png', '80% of damage will be returned to opponent with 8% chance', 'flash', 80, 2, 'secret');"
+);
+
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('CypherUltimate.png', 'You reveal all secret spells of opponent', 'ult', 0, 5, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixUltimate.png', 'All incoming damage + 15% will be returned to opponent', 'ult', 0, 8, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('ReynaUltimate.png', 'Heals you in amount of all incoming damage + 15%', 'ult', 0, 8, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('KayoUltimate.png', 'All active secret spells of opponent wiil be cancelled', 'ult', 0, 6, 'secret');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('RazeUltimate.png', 'Deals 20 damage to the opponent', 'ult', 20, 9, 'secret');"
+);
+
+
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.USER,

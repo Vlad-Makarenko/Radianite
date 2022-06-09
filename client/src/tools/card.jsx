@@ -18,6 +18,29 @@ import Sova from "../assets/cards/Sova.png";
 import Viper from "../assets/cards/Viper.png";
 import Yoru from "../assets/cards/Yoru.png";
 
+import ReynaHeal from "../assets/cards/ReynaHeal.png";
+import SageHeal from "../assets/cards/SageHeal.png";
+import SkyeHeal from "../assets/cards/SkyeHeal.png";
+import PhoenixHeal from "../assets/cards/PhoenixHeal.png";
+
+import BrimSmoke from "../assets/cards/BrimSmoke.png";
+import JettSmoke from "../assets/cards/JettSmoke.png";
+import ViperSmoke from "../assets/cards/ViperSmoke.png";
+import OmenSmoke from "../assets/cards/OmenSmoke.png";
+
+import BreachFlash from "../assets/cards/BreachFlash.png";
+import KayoFlash from "../assets/cards/KayoFlash.png";
+import PhoenixFlash from "../assets/cards/PhoenixFlash.png";
+import SkyeFlash from "../assets/cards/SkyeFlash.png";
+import YoruFlash from "../assets/cards/YoruFlash.png";
+import ReynaFlash from "../assets/cards/ReynaFlash.png";
+
+import CypherUltimate from "../assets/cards/CypherUltimate.png";
+import KayoUltimate from "../assets/cards/KayoUltimate.png";
+import PhoenixUltimate from "../assets/cards/PhoenixUltimate.png";
+import ReynaUltimate from "../assets/cards/ReynaUltimate.png";
+import RazeUltimate from "../assets/cards/RazeUltimate.png";
+
 export const chooseCard = (card, setDisplayName) => {
   switch (card?.name) {
     case "Astra.png":
@@ -73,6 +96,63 @@ export const chooseCard = (card, setDisplayName) => {
       break;
     case "Yoru.png":
       setDisplayName(Yoru);
+      break;
+    case "ReynaHeal.png":
+      setDisplayName(ReynaHeal);
+      break;
+    case "SageHeal.png":
+      setDisplayName(SageHeal);
+      break;
+    case "SkyeHeal.png":
+      setDisplayName(SkyeHeal);
+      break;
+    case "PhoenixHeal.png":
+      setDisplayName(PhoenixHeal);
+      break;
+    case "BrimSmoke.png":
+      setDisplayName(BrimSmoke);
+      break;
+    case "JettSmoke.png":
+      setDisplayName(JettSmoke);
+      break;
+    case "ViperSmoke.png":
+      setDisplayName(ViperSmoke);
+      break;
+    case "OmenSmoke.png":
+      setDisplayName(OmenSmoke);
+      break;
+    case "BreachFlash.png":
+      setDisplayName(BreachFlash);
+      break;
+    case "KayoFlash.png":
+      setDisplayName(KayoFlash);
+      break;
+    case "PhoenixFlash.png":
+      setDisplayName(PhoenixFlash);
+      break;
+    case "SkyeFlash.png":
+      setDisplayName(SkyeFlash);
+      break;
+    case "YoruFlash.png":
+      setDisplayName(YoruFlash);
+      break;
+    case "ReynaFlash.png":
+      setDisplayName(ReynaFlash);
+      break;
+    case "CypherUltimate.png":
+      setDisplayName(CypherUltimate);
+      break;
+    case "KayoUltimate.png":
+      setDisplayName(KayoUltimate);
+      break;
+    case "PhoenixUltimate.png":
+      setDisplayName(PhoenixUltimate);
+      break;
+    case "ReynaUltimate.png":
+      setDisplayName(ReynaUltimate);
+      break;
+    case "RazeUltimate.png":
+      setDisplayName(RazeUltimate);
       break;
     default:
       setDisplayName(shirt);
