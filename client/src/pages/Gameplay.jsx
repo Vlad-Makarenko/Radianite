@@ -32,6 +32,7 @@ export const Gameplay = () => {
   const [resaltActive, setResaltActive] = useState(false);
   const [waiting, setWaiting] = useState(true);
   const [turn, setTurn] = useState(false);
+  const [timer, setTimer] = useState('00:10');
   const history = useNavigate();
 
   const battleInfo = useBattleProfile();
@@ -66,6 +67,13 @@ export const Gameplay = () => {
 
     socket.on("changeTurn", (data) => {
       setTurn(data.turn);
+    });
+    socket.on("timerEnd", (data) => {
+      socket.emit("changeTurn");
+    });
+    
+    socket.on("timer", (data) => {
+      setTimer(data.timer);
     });
 
     socket.on("gameOver", (data) => {
@@ -112,7 +120,7 @@ export const Gameplay = () => {
         <div className="col s3">
           <InfoBlock
             oppTimer="00:10"
-            userTimer="00:10"
+            userTimer={timer}
             action={changeTurn}
             turn={turn}
           />

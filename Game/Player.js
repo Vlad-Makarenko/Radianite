@@ -12,6 +12,7 @@ module.exports = class Player {
     this.handCards = [];
     this.tableCards = [];
     this.turn = false;
+    this.timerId = null;
   }
 
   sendData() {
@@ -23,6 +24,29 @@ module.exports = class Player {
       deck: this.deck,
       avatar: this.avatar,
     });
+  }
+
+  startTimer(count) {
+    // let count = 5;
+    this.timerId = setInterval(() => {
+      let countText = count < 10 ? `0${count}` : `${count}`;
+      if (count <= 0) { 
+        // clearTimeout(this.timerId);
+        // clearInterval(this.timerId);
+        this.stopTimer()
+        // if (count == 0){
+        //   this.socket.emit("timerEnd"); //TODO: не обнуляеться в какой то раз?
+        // }
+      }
+      let timer = `00:${countText}`;
+      this.socket.emit("timer", { timer });
+      count--;
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearTimeout(this.timerId);
+    clearInterval(this.timerId);
   }
 
   changeHandCards(data) {

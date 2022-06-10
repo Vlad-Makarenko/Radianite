@@ -28,8 +28,12 @@ module.exports = class Game {
     let resTurn = Math.floor(Math.random() * 2) + 1;
     if (resTurn == 1) {
       this.p1.turn = true;
+      this.p1.startTimer(10);
+      this.p2.stopTimer();
     } else {
       this.p2.turn = true;
+      this.p2.startTimer(10);
+      this.p1.stopTimer();
     }
 
     this.players.forEach((data, index) => {
@@ -61,10 +65,12 @@ module.exports = class Game {
       const opponent = this.players[(index + 1) % 2];
 
       player.socket.on("changeTurn", () => {
+        player.stopTimer();
         player.turn = !player.turn;
         opponent.turn = !opponent.turn;
         opponent.socket.emit("changeTurn", { turn: opponent.turn });
         player.socket.emit("changeTurn", { turn: player.turn });
+        opponent.startTimer(10);
       });
 
       player.socket.on("moveCard", (data) => {
