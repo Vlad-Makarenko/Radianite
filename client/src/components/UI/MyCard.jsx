@@ -3,6 +3,7 @@ import { chooseCard } from "../../tools/card";
 import "../../styles/Card.css";
 
 import shirt from "../../assets/cards/Shirt.png";
+import Secret from "../../assets/cards/Secret.png";
 
 export const MyCard = ({ card, classes }) => {
   const [displayName, setDisplayName] = useState(shirt);
