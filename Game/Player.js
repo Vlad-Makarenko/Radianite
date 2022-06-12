@@ -8,7 +8,7 @@ module.exports = class Player {
     this.avatar = avatar;
     this.health = health;
     this.radianite = radianite;
-    this.currentRadianite = radianite;;
+    this.currentRadianite = radianite;
     this.deck = [];
     this.handCards = [];
     this.tableCards = [];
@@ -48,16 +48,18 @@ module.exports = class Player {
   }
 
   checkCard(data) {
-    if(data.price > this.currentRadianite){
+    if (data.price > this.currentRadianite) {
       this.socket.emit("error", "Not enough Radianite points");
       return false;
-    }else if (this.tableCards.length >= 5) {
+    } else if (this.tableCards.length >= 5) {
       this.socket.emit("error", "No more than 5 cards can be on the table");
       return false;
-    }else {
+    } else {
       this.currentRadianite -= data.price;
       this.socket.emit("updateUserRadianite", this.currentRadianite);
-      this.socket.to(this.room).emit("updateOppRadianite", this.currentRadianite);
+      this.socket
+        .to(this.room)
+        .emit("updateOppRadianite", this.currentRadianite);
     }
     return true;
   }
@@ -68,8 +70,8 @@ module.exports = class Player {
   }
 
   changeTableCards(data) {
-      this.tableCards.push(data);
-      this.socket.emit("updateUserTableCards", { cards: this.tableCards });
+    this.tableCards.push(data);
+    this.socket.emit("updateUserTableCards", { cards: this.tableCards });
   }
 
   changeHealth(amount, sign) {
@@ -78,22 +80,35 @@ module.exports = class Player {
       this.health -= Math.round(amount);
     } else {
       this.health += amount;
-      if(this.health > 50) {
+      if (this.health > 50) {
         this.health = 50;
       }
     }
   }
 
   radianiteUp() {
-    if((this.radianite + 1) < 10){
+    if (this.radianite + 1 < 10) {
       this.radianite += 1;
     }
     this.currentRadianite = this.radianite;
   }
 
+  startHandCards() {
+    let attackCards = this.deck.filter((data) => data.type == "damage");
+    for (let i = 0; i < 3; i++) {
+      let attCard = attackCards[Math.floor(Math.random() * attackCards.length)]; //import?
 
-  startHandCards(n) {
-    for (let i = 0; i < n; i++) {
+      this.handCards.push(attCard);
+      attackCards = attackCards.filter((data) => data.id != attCard.id);
+      this.deck = this.deck.filter((data) => data.id != attCard.id);
+    }
+
+    let defCards = this.deck.filter((data) => data.type == "defense");
+    let defCard = defCards[Math.floor(Math.random() * defCards.length)]; //import?
+    this.handCards.push(defCard);
+    this.deck = this.deck.filter((data) => data.id != defCard.id);
+
+    for (let i = 0; i < 2; i++) {
       let card = this.deck[Math.floor(Math.random() * this.deck.length)]; //import?
       this.handCards.push(card);
       this.deck = this.deck.filter((data) => data.id != card.id);

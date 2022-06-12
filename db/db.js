@@ -15,6 +15,9 @@ query_strs.push(
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Raze.png', 'card deals 9 damage to the opponent', 'damage', 9, 4, 'public');"
 );
+query_strs.push( 
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Raze.png', 'card deals 9 damage to the opponent', 'damage', 9, 4, 'public');"
+);
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Sova.png', 'card deals 9 damage to the opponent', 'damage', 9, 4, 'public');"
 );
@@ -26,6 +29,24 @@ query_strs.push(
 );
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Jett.png', 'card deals 4 damage to the opponent', 'damage', 4, 2, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Jett.png', 'card deals 4 damage to the opponent', 'damage', 4, 2, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Jett.png', 'card deals 4 damage to the opponent', 'damage', 4, 2, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Neon.png', 'card deals 2 damage to the opponent', 'damage', 2, 1, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Yoru.png', 'card deals 2 damage to the opponent', 'damage', 2, 1, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Neon.png', 'card deals 2 damage to the opponent', 'damage', 2, 1, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Yoru.png', 'card deals 2 damage to the opponent', 'damage', 2, 1, 'public');"
 );
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Neon.png', 'card deals 2 damage to the opponent', 'damage', 2, 1, 'public');"
@@ -60,8 +81,8 @@ query_strs.push(
 );
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('Omen.png', 'This card provides protection against 1 damage', 'defense', 1, 1, 'public');"
-);
-
+); 
+ 
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SageHeal.png', 'Heals player in amount of 12 hp', 'heal', 12, 5, 'public');"
 );
@@ -70,6 +91,12 @@ query_strs.push(
 );
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixHeal.png', 'Heals player in amount of 6 hp', 'heal', 6, 3, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixHeal.png', 'Heals player in amount of 6 hp', 'heal', 6, 3, 'public');"
+);
+query_strs.push(
+  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SkyeHeal.png', 'Heals player in amount of 4 hp', 'heal', 4, 2, 'public');"
 );
 query_strs.push(
   "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SkyeHeal.png', 'Heals player in amount of 4 hp', 'heal', 4, 2, 'public');"

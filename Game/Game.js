@@ -53,7 +53,7 @@ module.exports = class Game {
         opponent: opponent.name,
         turn: data.turn,
       });
-      data.startHandCards(6);
+      data.startHandCards();
     });
 
     this.players.forEach((data, index) => {
@@ -180,6 +180,37 @@ module.exports = class Game {
 
     let p2DefSum = 0;
     let p2DamSum = 0;
+
+    p1UltCards.forEach((card) => {
+      if (card.name === "KayoUltimate.png") { //TODO: KAYO ULT CHECKER FOR OTHER PLAYER TABLE CARDS
+        p2FlashCards = [];
+        p2SmokeCards = [];
+        p2UltCards = [];
+      }
+    })
+
+    p2UltCards.forEach((card) => {
+      if (card.name === "KayoUltimate.png") {
+        p1FlashCards = [];
+        p1SmokeCards = [];
+        p1UltCards = [];
+      }
+    })
+
+    p1UltCards.forEach((card) => {
+      if (card.name === "RazeUltimate.png") {
+        //Raze Ultimate
+        p1DamSum += 20;
+      }
+    });
+
+    p2UltCards.forEach((card) => {
+      if (card.name === "RazeUltimate.png") {
+        //Raze Ultimate
+        p2DamSum += 20;
+      }
+    });
+
     p2DefenseCards.forEach((card) => {
       p2DefSum += card.power_points;
     });
@@ -214,6 +245,30 @@ module.exports = class Game {
       let plusDamage = card.power_points / 100;
       if (foo < card.flash_chance) {
         p2DamSum += p1DamSum * plusDamage;
+      }
+    });
+
+    p1UltCards.forEach((card) => {
+      if (card.name === "ReynaUltimate.png") {
+        //Reyna Ultimate
+        let reynaHeal = p2DamSum + p2DamSum * 0.15;
+        this.p1.changeHealth(reynaHeal, "+");
+        p2DamSum = 0;
+      } else if (card.name === "PhoenixUltimate.png") {
+        p1DamSum += p2DamSum;
+        p1DamSum += p2DamSum * 0.15;
+      }
+    });
+
+    p2UltCards.forEach((card) => {
+      if (card.name === "ReynaUltimate.png") {
+        //Reyna Ultimate
+        let reynaHeal = p1DamSum + p1DamSum * 0.15;
+        this.p2.changeHealth(reynaHeal, "+");
+        p1DamSum = 0;
+      } else if (card.name === "PhoenixUltimate.png") {
+        p2DamSum += p1DamSum;
+        p2DamSum += p1DamSum * 0.15;
       }
     });
 
