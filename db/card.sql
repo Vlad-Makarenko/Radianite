@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS card (
     description varchar(255) NOT NULL,
     type ENUM('damage', 'defense', 'heal', 'smoke', 'flash', 'ult') NOT NULL,
     power_points INT UNSIGNED NOT NULL,
+    flash_chance INT UNSIGNED DEFAULT 0,
     price INT UNSIGNED NOT NULL,
     status ENUM('secret', 'public') NOT NULL DEFAULT 'public'
 );

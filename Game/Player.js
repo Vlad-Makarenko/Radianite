@@ -8,6 +8,7 @@ module.exports = class Player {
     this.avatar = avatar;
     this.health = health;
     this.radianite = radianite;
+    this.currentRadianite = radianite;;
     this.deck = [];
     this.handCards = [];
     this.tableCards = [];
@@ -30,17 +31,14 @@ module.exports = class Player {
     // let count = 5;
     this.timerId = setInterval(() => {
       let countText = count < 10 ? `0${count}` : `${count}`;
-      if (count <= 0) { 
-        // clearTimeout(this.timerId);
-        // clearInterval(this.timerId);
-        this.stopTimer()
-        // if (count == 0){
-        //   this.socket.emit("timerEnd"); //TODO: не обнуляеться в какой то раз?
-        // }
+      if (count <= 0) {
+        this.stopTimer();
       }
-      let timer = `00:${countText}`;
-      this.socket.emit("timer", { timer });
-      count--;
+      if (count >= 0) {
+        let timer = `00:${countText}`;
+        this.socket.emit("timer", { timer });
+        count--;
+      }
     }, 1000);
   }
 
@@ -49,43 +47,50 @@ module.exports = class Player {
     clearInterval(this.timerId);
   }
 
+  checkCard(data) {
+    if(data.price > this.currentRadianite){
+      this.socket.emit("error", "Not enough Radianite points");
+      return false;
+    }else if (this.tableCards.length >= 5) {
+      this.socket.emit("error", "No more than 5 cards can be on the table");
+      return false;
+    }else {
+      this.currentRadianite -= data.price;
+      this.socket.emit("updateUserRadianite", this.currentRadianite);
+      this.socket.to(this.room).emit("updateOppRadianite", this.currentRadianite);
+    }
+    return true;
+  }
+
   changeHandCards(data) {
     this.handCards = this.handCards.filter((card) => card.id !== data.id);
     this.socket.emit("updateHandCards", { cards: this.handCards });
   }
 
   changeTableCards(data) {
-    this.tableCards.push(data);
-    this.socket.emit("updateUserTableCards", { cards: this.tableCards });
+      this.tableCards.push(data);
+      this.socket.emit("updateUserTableCards", { cards: this.tableCards });
   }
 
-  changeHealth(sign, amount) {
+  changeHealth(amount, sign) {
     //if heal: sign +; if attack: sign -
     if (sign == "-") {
-      this.health -= amount;
+      this.health -= Math.round(amount);
     } else {
       this.health += amount;
-    }
-
-    if (this.health <= 0) {
-      message = "You loose"; //rework
+      if(this.health > 50) {
+        this.health = 50;
+      }
     }
   }
 
   radianiteUp() {
-    this.radianite += 1;
+    if((this.radianite + 1) < 10){
+      this.radianite += 1;
+    }
+    this.currentRadianite = this.radianite;
   }
 
-  useRadianite(temp, amount) {
-    temp = this.radianite; //we declare temp with this string in the start of the move
-    if (amount < temp) {
-      temp -= amount;
-    } else {
-      let message = "Not enough radianite";
-      return message;
-    }
-    return temp;
-  }
 
   startHandCards(n) {
     for (let i = 0; i < n; i++) {

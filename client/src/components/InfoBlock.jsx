@@ -3,16 +3,16 @@ import React from "react";
 import "../styles/InfoBlock.css";
 
 export const InfoBlock = ({
-  oppTimer = "00:00",
+  // oppTimer = "00:00",
   turn,
   userTimer = "00:00",
   action,
 }) => {
   return (
     <div className="InfoBlock">
-      <div className="col s12 OppTimer">
+      {/* <div className="col s12 OppTimer">
         <span>{oppTimer}</span>
-      </div>
+      </div> */}
       <div className="col s12 TurnBlock">
         <button
           className="btn waves-effect waves-light orange TurnButton"

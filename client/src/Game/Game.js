@@ -89,5 +89,41 @@ export default class Game {
     this.socket.on("updateUserTableCards", (data) => {
       this.states.setTableUserCards(data.cards);
     });
+
+    this.socket.on("updateUserHealth", (data) => {
+      this.player.health = data;
+      this.states.setUserHitPoints(data);
+    });
+
+    this.socket.on("updateUserRadianite", (data) => {
+      this.player.radianite = data;
+      this.states.setUserRadianitePoints(data);
+    });
+
+    this.socket.on("updateUserHandCards", (data) => {
+      this.player.handCards = data;
+      this.states.setUserCards(data);
+    });
+
+    this.socket.on("updateOppHealth", (data) => {
+      this.player.health = data;
+      this.states.setOpponentHitPoints(data);
+    });
+
+    this.socket.on("updateOppRadianite", (data) => {
+      this.player.radianite = data;
+      this.states.setOpponentRadianitePoints(data);
+    });
+
+    this.socket.on("updateOppHandCards", (data) => {
+      this.player.handCards = data;
+      this.states.setOppCards(data);
+    });
+
+    this.socket.on("clearTable", () => {
+      this.states.setTableUserCards([]);
+      this.states.setTableOppCards([]);
+    });
+
   }
 }

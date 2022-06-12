@@ -89,22 +89,22 @@ query_strs.push(
 );
 
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('PhoenixFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 4, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('PhoenixFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 60, 4, 'secret');"
 );
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('ReynaFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 4, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('ReynaFlash.png', '50% of damage will be returned to opponent with 60% chance', 'flash', 50, 60, 4, 'secret');"
 );
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('KayoFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 3, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('KayoFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 45, 3, 'secret');"
 );
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('BreachFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 3, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('BreachFlash.png', '35% of damage will be returned to opponent with 45% chance', 'flash', 35, 45, 3, 'secret');"
 );
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('SkyeFlash.png', '30% of damage will be returned to opponent with 20% chance', 'flash', 30, 2, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('SkyeFlash.png', '30% of damage will be returned to opponent with 20% chance', 'flash', 30, 20, 2, 'secret');"
 );
 query_strs.push(
-  "INSERT IGNORE INTO card (name, description, type, power_points, price, status) VALUES ('YoruFlash.png', '80% of damage will be returned to opponent with 8% chance', 'flash', 80, 2, 'secret');"
+  "INSERT IGNORE INTO card (name, description, type, power_points, flash_chance, price, status) VALUES ('YoruFlash.png', '80% of damage will be returned to opponent with 8% chance', 'flash', 80, 8, 2, 'secret');"
 );
 
 query_strs.push(

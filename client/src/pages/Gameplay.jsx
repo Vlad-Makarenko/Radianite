@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 
@@ -14,6 +14,7 @@ import { Result } from "../components/Result";
 import { AuthContext } from "../contexts/AuthContext";
 import { BattleContext } from "../contexts/BattleContext";
 
+import { useMessage } from "../hooks/message.hook";
 import { useBattle } from "../hooks/battle.hook";
 import { useBattleProfile } from "../hooks/battleProfile.hook";
 
@@ -28,12 +29,14 @@ export const Gameplay = () => {
   const { userId } = useContext(AuthContext);
 
   const [popupCard, setPopupCard] = useState(null);
+  const [error, setError] = useState(null);
   const [result, setResult] = useState();
   const [resaltActive, setResaltActive] = useState(false);
   const [waiting, setWaiting] = useState(true);
   const [turn, setTurn] = useState(false);
-  const [timer, setTimer] = useState('00:10');
+  const [timer, setTimer] = useState("00:10");
   const history = useNavigate();
+  const message = useMessage();
 
   const battleInfo = useBattleProfile();
   const state = useBattle();
@@ -42,8 +45,15 @@ export const Gameplay = () => {
   const room = useParams().id;
 
   const changeTurn = () => {
+    setTimer('00:00');
     socket.emit("changeTurn");
   };
+
+  useEffect(() => {
+    message(error);
+    setError(null)
+  }, [error, message]);
+
 
   useEffect(() => {
     socket.emit("initGame", { room, userId });
@@ -52,6 +62,10 @@ export const Gameplay = () => {
   useEffect(() => {
     socket.on("waiting", (data) => {
       setWaiting(true);
+    });
+
+    socket.on("error", (data) => {
+      setError(data);
     });
 
     socket.on("startGame", (data) => {
@@ -65,13 +79,22 @@ export const Gameplay = () => {
       setWaiting(false);
     });
 
+    socket.on("startCounting", (data) => {
+      //TODO: HERE DISPLAY SECRET CARD
+      setWaiting(true);
+    });
+
+    socket.on("endCounting", (data) => {
+      setWaiting(false);
+    });
+
     socket.on("changeTurn", (data) => {
       setTurn(data.turn);
     });
     socket.on("timerEnd", (data) => {
       socket.emit("changeTurn");
     });
-    
+
     socket.on("timer", (data) => {
       setTimer(data.timer);
     });
@@ -84,7 +107,7 @@ export const Gameplay = () => {
         history("/battle");
       }, 3000);
     });
-  }, [state, battleInfo, history]);
+  }, [state, battleInfo, history, message, error]);
 
   if (waiting) {
     return <Loader info={"Waiting for the opponent..."} />;
