@@ -2,12 +2,9 @@ import React from "react";
 
 import "../styles/InfoBlock.css";
 
-export const InfoBlock = ({
-  // oppTimer = "00:00",
-  turn,
-  userTimer = "00:00",
-  action,
-}) => {
+export const InfoBlock = ({ turn, userTimer = "00:00", action }) => {
+  let btnClasses = ["waves-effect", "waves-light", "TurnButton"]
+  turn ? btnClasses.push("btnActive") :  btnClasses.push("");
   return (
     <div className="InfoBlock">
       {/* <div className="col s12 OppTimer">
@@ -15,12 +12,10 @@ export const InfoBlock = ({
       </div> */}
       <div className="col s12 TurnBlock">
         <button
-          className="btn waves-effect waves-light orange TurnButton"
+          className={btnClasses.join(' ')}
           onClick={action}
           disabled={!turn}
-        >
-          End turn
-        </button>
+        ></button>
       </div>
       <div className="col s12 TextInfBlock">
         {turn ? (

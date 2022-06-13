@@ -12,9 +12,14 @@ export const Rules = () => {
   const { loading, request } = useHttp();
 
   const fetchData = useCallback(async () => {
-    const data = await request("/api/card", "POST");
-    console.log("CARDS:", data);
-    setCards(data);
+    let data = await request("/api/card", "POST");
+    const uniqueArray = data.filter(
+      (v, i, a) => a.findIndex((t) => t.name === v.name) === i
+    );
+    uniqueArray.forEach((card) => {
+      card.status = "public";
+    });
+    setCards(uniqueArray);
   }, [request]);
 
   useEffect(() => {
@@ -34,8 +39,8 @@ export const Rules = () => {
         <h1>All cards:</h1>
         <div className="CardContainer">
           {cards.map((data, index) => (
-            <div className="CardImgContainer">
-              <MyCard card={data} key={index} classes={["RulesCard"]} />
+            <div key={index} className="CardImgContainer">
+              <MyCard card={data} classes={["RulesCard"]} />
             </div>
           ))}
         </div>

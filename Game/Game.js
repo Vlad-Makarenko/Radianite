@@ -1,6 +1,7 @@
 const Player = require("./Player");
 const Card = require("../models/Card");
-const e = require("cors");
+const Room = require("../models/Room");
+const User = require("../models/User");
 
 module.exports = class Game {
   /**
@@ -31,14 +32,14 @@ module.exports = class Game {
     let resTurn = Math.floor(Math.random() * 2) + 1;
     if (resTurn == 1) {
       this.p1.turn = true;
-      this.p1.startTimer(10);
+      this.p1.startTimer(59);
       this.p2.stopTimer();
       // this.timeOutId = setTimeout(() => {
       //   this.p1.socket.emit("timerEnd");
       // }, 12000)
     } else {
       this.p2.turn = true;
-      this.p2.startTimer(10);
+      this.p2.startTimer(59);
       this.p1.stopTimer();
       // this.timeOutId = setTimeout(() => {
       //   this.p2.socket.emit("timerEnd");
@@ -90,7 +91,7 @@ module.exports = class Game {
             this.#updatePlayers();
             opponent.socket.emit("changeTurn", { turn: opponent.turn }); // ???
             player.socket.emit("changeTurn", { turn: player.turn }); // ???
-            player.startTimer();
+            player.startTimer(59);
 
             // this.timeOutId = setTimeout( () => {
             //   player.socket.emit("timerEnd");
@@ -106,7 +107,7 @@ module.exports = class Game {
           opponent.turn = !opponent.turn;
           opponent.socket.emit("changeTurn", { turn: opponent.turn });
           player.socket.emit("changeTurn", { turn: player.turn });
-          opponent.startTimer(10);
+          opponent.startTimer(59);
           // this.timeOutId = setTimeout(() => {
           //   opponent.socket.emit("timerEnd");
           //   opponent.stopTimer();
@@ -118,6 +119,14 @@ module.exports = class Game {
 
       player.socket.on("moveCard", (data) => {
         if (player.checkCard(data)) {
+          if (data.name === "CypherUltimate.png") {
+            opponent.tableCards.forEach((card) => {
+              card.status = "public";
+            });
+            player.socket.emit("updateOpponentTableCards", {
+              cards: opponent.tableCards,
+            });
+          }
           player.changeHandCards(data);
           player.changeTableCards(data);
           // opponent.socket.emit("updateOpponentCards",  { cards: player.handCards })
@@ -130,12 +139,23 @@ module.exports = class Game {
         }
       });
 
-      player.socket.on("GiveUp", (data) => {
+      player.socket.on("GiveUp", async (data) => {
         //TODO: Delete/Clear Socket
         player.socket.emit("gameOver", { result: "lose" });
         opponent.socket.emit("gameOver", { result: "win" });
+        this.#updateStatistics(opponent.name, player.name);
+        Room.delete(player.room);
       });
     });
+  }
+
+  async #updateStatistics(winnerName, loserName) {
+    const winner = await new User().findBy("login", winnerName);
+    winner.win_counter++;
+    await winner.save();
+    const loser = await new User().findBy("login", loserName);
+    loser.lose_counter++;
+    await loser.save();
   }
 
   #CountCards() {
@@ -182,12 +202,13 @@ module.exports = class Game {
     let p2DamSum = 0;
 
     p1UltCards.forEach((card) => {
-      if (card.name === "KayoUltimate.png") { //TODO: KAYO ULT CHECKER FOR OTHER PLAYER TABLE CARDS
+      if (card.name === "KayoUltimate.png") {
+        //TODO: KAYO ULT CHECKER FOR OTHER PLAYER TABLE CARDS
         p2FlashCards = [];
         p2SmokeCards = [];
         p2UltCards = [];
       }
-    })
+    });
 
     p2UltCards.forEach((card) => {
       if (card.name === "KayoUltimate.png") {
@@ -195,7 +216,7 @@ module.exports = class Game {
         p1SmokeCards = [];
         p1UltCards = [];
       }
-    })
+    });
 
     p1UltCards.forEach((card) => {
       if (card.name === "RazeUltimate.png") {
@@ -291,7 +312,8 @@ module.exports = class Game {
       player.radianiteUp();
       player.radianiteUp();
 
-      let newCardCount = player.handCards.length < 4 ? 2 : 1;
+      let newCardCount =
+        player.handCards.length < 3 ? 3 : player.handCards.length < 5 ? 2 : 1;
       player.takeNewCard(newCardCount);
       player.socket.emit("clearTable");
       player.tableCards = [];
@@ -309,17 +331,29 @@ module.exports = class Game {
       player.socket.emit("updateOppHandCards", opponent.handCards);
     });
 
-    this.players.forEach((player, index) => {
+    this.players.forEach(async (player, index) => {
       const opponent = this.players[(index + 1) % 2];
+      if (player.health <= 0 && opponent.health <= 0) {
+        player.socket.emit("gameOver", { result: "draw" });
+        const winner = await new User().findBy("login", winnerName);
+        winner.draw_counter++;
+        await winner.save();
+        Room.delete(player.room);
+      } else {
+        if (player.health <= 0) {
+          player.socket.emit("gameOver", { result: "lose" });
+          opponent.socket.emit("gameOver", { result: "win" });
+          this.#updateStatistics(opponent.name, player.name);
+          Room.delete(player.room);
+        }
 
-      if (player.health <= 0) {
-        player.socket.emit("gameOver", { result: "lose" });
-        opponent.socket.emit("gameOver", { result: "win" });
-      }
+        if (player.handCards.length == 0) {
+          player.socket.emit("gameOver", { result: "lose" });
+          opponent.socket.emit("gameOver", { result: "win" });
+          this.#updateStatistics(opponent.name, player.name);
 
-      if (player.handCards.length == 0) {
-        player.socket.emit("gameOver", { result: "lose" });
-        opponent.socket.emit("gameOver", { result: "win" });
+          Room.delete(player.room);
+        }
       }
     });
   }

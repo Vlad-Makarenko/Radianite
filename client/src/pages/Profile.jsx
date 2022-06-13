@@ -19,6 +19,11 @@ export const Profile = () => {
   const [avatar, setAvatar] = useState(defaultAvatar);
   const [userLogin, setUserLogin] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
+  const [winsCount, setWinsCount] = useState(0);
+  const [loseCount, setLoseCount] = useState(0);
+  const [drawCounter, setDrawCounter] = useState(0);
+  const [winRate, setWinRate] = useState(0);
+
 
   const { loading, request } = useHttp();
 
@@ -31,6 +36,11 @@ export const Profile = () => {
       chooseAvatar(data.avatar, setAvatar, data.login);
       setDescription(data.description);
       setDescriptionMessage(data.description);
+      setWinsCount(data.win_counter)
+      setLoseCount(data.lose_counter)
+      setDrawCounter(data.draw_counter)
+      const winrateRes = (data.win_counter / (data.win_counter + data.lose_counter + data.draw_counter) ) * 100;
+      setWinRate(winrateRes);
     } catch (e) {}
   }, [request, auth.userId]);
 
@@ -69,7 +79,7 @@ export const Profile = () => {
         <div className="row">
           <div className="col s5 ">
             {/*change here for width (here was s12 m5 -> changed into s5)*/}
-            <div className="card">
+            <div className="card deep-orange darken-3">
               <div className="card-image profileBlockImage">
                 <img className="profileImage" src={avatar} alt="avatar" />
                 <span className="card-title userNickname">{userLogin}</span>
@@ -97,9 +107,25 @@ export const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="col s7">
-            <div className="card-image profileBlockImage">
-              <p>Statistics</p>
+          <div className="col s7 deep-orange darken-3 statCont">
+            <div className="col s12 textStatistics statBlocksText">
+              <span>Statistics</span>
+            </div>
+            <div className="col s6 textWins statBlocksText">
+              <h4>Wins</h4>
+              <h4>{winsCount}</h4>
+            </div>
+            <div className="col s6 textLose statBlocksText">
+              <h4>Loses</h4>
+              <h4>{loseCount}</h4>
+            </div>
+            <div className="col s6 textDraw statBlocksText">
+              <h4>Draws</h4>
+              <h4>{drawCounter}</h4>
+            </div>
+            <div className="col s6 textRate statBlocksText">
+              <h4>WinRate</h4>
+              <h4>{winRate}</h4>
             </div>
           </div>
         </div>

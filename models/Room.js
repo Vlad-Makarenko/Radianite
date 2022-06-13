@@ -47,4 +47,15 @@ module.exports = class Room {
       await conn.promise().query(query_str);
     }
   }
+
+  static delete(name) {
+    const query_str = `DELETE FROM room WHERE name='${name}'`;
+    conn.query(query_str, (err) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(`row by name = '${name}' is deleted from room table`);
+        }
+    })
+}
 };

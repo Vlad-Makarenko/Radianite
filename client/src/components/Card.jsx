@@ -8,7 +8,7 @@ export const Card = ({ card, setPopupCard, side, placement, turn }) => {
 
   return (
     <div
-      onMouseEnter={() => setPopupCard(card)}
+      onMouseEnter={() => setPopupCard({...card, placement})}
       onMouseLeave={() => setPopupCard(null)}
       onClick={() => {
         if( side === "user" && !turn){

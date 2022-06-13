@@ -82,7 +82,7 @@ module.exports = class Player {
       this.health += amount;
       if (this.health > 50) {
         this.health = 50;
-      }
+      }  
     }
   }
 
@@ -117,7 +117,7 @@ module.exports = class Player {
 
   takeNewCard(count) {
     if (count <= this.deck.length) {
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < count && this.handCards.length < 8; i++) {
         let card = this.deck[Math.floor(Math.random() * this.deck.length)]; //import?
         this.handCards.push(card);
         this.deck = this.deck.filter((data) => data.id != card.id);

@@ -10,6 +10,8 @@
   border-radius: 15px;
   width: 100%;
   height: calc(100vh - 82.5vh);
+  background-image: url(https://i.pinimg.com/originals/d3/39/5e/d3395ed9226a8a74c22891f4b2fe688f.png);
+  background-size: cover;
 }
 
 .InfoProfileBlock {
