@@ -10,6 +10,7 @@ import { BattleProfile } from "../components/BattleProfile";
 import { InfoBlock } from "../components/InfoBlock";
 import { GiveUp } from "../components/GiveUp";
 import { Result } from "../components/Result";
+import { Counting } from "../components/Counting";
 
 import { AuthContext } from "../contexts/AuthContext";
 import { BattleContext } from "../contexts/BattleContext";
@@ -32,6 +33,7 @@ export const Gameplay = () => {
   const [error, setError] = useState(null);
   const [result, setResult] = useState();
   const [resaltActive, setResaltActive] = useState(false);
+  const [countingActive, setCountingActive] = useState(false);
   const [waiting, setWaiting] = useState(true);
   const [turn, setTurn] = useState(false);
   const [timer, setTimer] = useState("00:10");
@@ -81,11 +83,11 @@ export const Gameplay = () => {
 
     socket.on("startCounting", (data) => {
       //TODO: HERE DISPLAY SECRET CARD
-      setWaiting(true);
+      setCountingActive(true);
     });
 
     socket.on("endCounting", (data) => {
-      setWaiting(false);
+      setCountingActive(false);
     });
 
     socket.on("changeTurn", (data) => {
@@ -167,8 +169,12 @@ export const Gameplay = () => {
         </div>
         <Result
           active={resaltActive}
-          setActive={setResaltActive}
           status={result}
+        />
+        <Counting 
+          active={countingActive}
+          oppTCards={state.tableOppCards}
+          userTCards={state.tableUserCards}
         />
       </div>
     </BattleContext.Provider>

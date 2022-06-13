@@ -78,7 +78,8 @@
   height: 50vh !important;
   font-weight: bold;
   font-size: 4vh;
-
+  /* background-image: url(https://i.pinimg.com/originals/d3/39/5e/d3395ed9226a8a74c22891f4b2fe688f.png);
+  background-size: cover; */
   color: white;
   border-radius: 20px;
 }
@@ -104,7 +105,10 @@
 .textLose{
   text-align: center;
   height: 40%;
-  color: rgb(226, 11, 11);
+  color: rgb(153, 6, 6);
+}
+.textLose:hover{
+  color: rgb(202, 17, 17);
 }
 
 .textDraw{

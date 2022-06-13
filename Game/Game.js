@@ -98,7 +98,7 @@ module.exports = class Game {
             //   opponent.stopTimer();
             //   player.stopTimer();
             // }, 11000)
-          }, 5000);
+          }, 3000);
         } else {
           clearTimeout(this.timeOutId);
           player.stopTimer();
@@ -135,7 +135,7 @@ module.exports = class Game {
             .emit("updateOpponentCards", { cards: player.handCards });
           player.socket
             .to(player.room)
-            .emit("updateOpponentTableCards", { cards: player.tableCards }); //TODO: update handCards
+            .emit("updateOpponentTableCards", { cards: player.tableCards });
         }
       });
 
