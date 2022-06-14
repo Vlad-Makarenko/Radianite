@@ -42,7 +42,7 @@ export const Auth = () => {
   };
 
   return (
-    <div className="row">
+    <div className="row Animation">
       <div className="col s6 offset-s3">
         {/* <div style={{width: 500}}> */}
         <b>

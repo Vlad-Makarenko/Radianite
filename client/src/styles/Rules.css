@@ -1,5 +1,27 @@
-.Rules {
+.Rules{
   color: white !important;
+}
+
+.rulesText{
+  margin: 2%;
+  font-size: 1.9vh;
+}
+
+.RulesContainer{
+  margin: 5%;
+  border-radius: 30px; 
+  border: 1px solid bisque;
+  padding: 3%;
+}
+
+.redSpan{
+  color: orangered;
+
+}
+.numSpan{
+  color: greenyellow;
+}
+.RulesText {
   text-align: center !important;
 }
 
