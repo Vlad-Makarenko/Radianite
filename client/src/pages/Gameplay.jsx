@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 
@@ -48,19 +48,18 @@ export const Gameplay = () => {
   const room = useParams().id;
 
   const changeTurn = () => {
-    setTimer('00:00');
+    setTimer("00:00");
     socket.emit("changeTurn");
   };
 
   useEffect(() => {
     message(error);
-    setError(null)
+    setError(null);
   }, [error, message]);
-
 
   useEffect(() => {
     socket.emit("initGame", { room, userId });
-  }, [room, userId]); 
+  }, [room, userId]);
 
   useEffect(() => {
     socket.on("waiting", (data) => {
@@ -151,9 +150,8 @@ export const Gameplay = () => {
             turn={turn}
           />
         </div>
-        {/* <div className="col s12"></div> */}
         <div className="col s3">
-          <Deck/>
+          <Deck />
         </div>
         <div className="col s6">
           <CardList
@@ -171,16 +169,13 @@ export const Gameplay = () => {
             Login={battleInfo.userLogin}
           />
         </div>
-        </div>
-        <Result
-          active={resaltActive}
-          status={result}
-        />
-        <Counting 
-          active={countingActive}
-          oppTCards={state.tableOppCards}
-          userTCards={state.tableUserCards}
-        />
+      </div>
+      <Result active={resaltActive} status={result} />
+      <Counting
+        active={countingActive}
+        oppTCards={state.tableOppCards}
+        userTCards={state.tableUserCards}
+      />
       {/* </div> */}
     </BattleContext.Provider>
   );

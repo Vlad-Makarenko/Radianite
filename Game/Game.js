@@ -335,7 +335,7 @@ module.exports = class Game {
       const opponent = this.players[(index + 1) % 2];
       if (player.health <= 0 && opponent.health <= 0) {
         player.socket.emit("gameOver", { result: "draw" });
-        const winner = await new User().findBy("login", winnerName);
+        const winner = await new User().findBy("login", player.name);
         winner.draw_counter++;
         await winner.save();
         Room.delete(player.room);
