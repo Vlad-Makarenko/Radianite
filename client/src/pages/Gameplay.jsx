@@ -11,6 +11,7 @@ import { InfoBlock } from "../components/InfoBlock";
 import { GiveUp } from "../components/GiveUp";
 import { Result } from "../components/Result";
 import { Counting } from "../components/Counting";
+import { Deck } from "../components/Deck";
 
 import { AuthContext } from "../contexts/AuthContext";
 import { BattleContext } from "../contexts/BattleContext";
@@ -150,8 +151,11 @@ export const Gameplay = () => {
             turn={turn}
           />
         </div>
-
-        <div className="col s6 offset-s3">
+        {/* <div className="col s12"></div> */}
+        <div className="col s3">
+          <Deck/>
+        </div>
+        <div className="col s6">
           <CardList
             classes={turn ? ["CardList"] : ["CardList", "disabledTurn"]}
             side="User"
@@ -167,6 +171,7 @@ export const Gameplay = () => {
             Login={battleInfo.userLogin}
           />
         </div>
+        </div>
         <Result
           active={resaltActive}
           status={result}
@@ -176,7 +181,7 @@ export const Gameplay = () => {
           oppTCards={state.tableOppCards}
           userTCards={state.tableUserCards}
         />
-      </div>
+      {/* </div> */}
     </BattleContext.Provider>
   );
 };
