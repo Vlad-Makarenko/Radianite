@@ -8,8 +8,6 @@ import Secret from "../../assets/cards/Secret.png";
 export const MyCard = ({ card, classes }) => {
   const [displayName, setDisplayName] = useState(Shirt);
   useEffect(() => {
-    console.log(`Card:`, card.status);
-
     if (!classes.includes("opponent")) {
       if (!classes.includes("user") && card.status === "secret") {
         setDisplayName(Secret);

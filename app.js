@@ -29,20 +29,6 @@ const io = new Server(server, {
 });
 
 io.on("connection", sockerHandler);
-//  => {
-//   console.log(socket.id)
-
-//   socket.on('Join_Room', (room) => {
-//     socket.join(room)
-//     console.log("SOCKET:", socket)
-//     console.log("SOCKET ID:", socket.id)
-//   })
-
-//   socket.on('Send_Message', (data) => {
-//     console.log(data)
-//     socket.to(data.room).emit("recieved_message", data.message)
-//   })
-// })
 
 server.listen(PORT, () =>
   console.log(`server is running on http://${HOST}:${PORT}`)

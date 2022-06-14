@@ -22,10 +22,10 @@
   cursor: pointer;
   padding: 20px;
   border-radius: 12px;
-  height: 100;
+  height: 100px;
   transform: scale(0.5);
   transition: 0.4s all;
-  background-color: rgb(255, 234, 0);
+  background-color: rgb(255, 115, 0);
   border: 2px solid black;
 }
 

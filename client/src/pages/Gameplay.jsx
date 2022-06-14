@@ -59,7 +59,7 @@ export const Gameplay = () => {
 
   useEffect(() => {
     socket.emit("initGame", { room, userId });
-  }, [room, userId]);
+  }, [room, userId]); 
 
   useEffect(() => {
     socket.on("waiting", (data) => {

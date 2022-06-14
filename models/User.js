@@ -38,7 +38,6 @@ module.exports = class User {
   }
 
   async save() {
-    console.log(this);
     if (await this.isExist(this.login)) {
       const query_str = `UPDATE user SET description='${this.description}', avatar='${this.avatar}', win_counter='${this.win_counter}', lose_counter='${this.lose_counter}', draw_counter='${this.draw_counter}' WHERE login='${this.login}'`;
       await conn.promise().query(query_str);

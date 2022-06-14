@@ -9,7 +9,8 @@ function noop() {}
 export const Counting = ({ active, userTCards, oppTCards}) => {
 
   const classes = ["Counting"];
-
+  console.log(userTCards);
+  console.log(oppTCards);
 
   active ? classes.push("active") : classes.push("");
 

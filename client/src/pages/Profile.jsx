@@ -30,7 +30,6 @@ export const Profile = () => {
   const fetchData = useCallback(async () => {
     try {
       const data = await request("/api/user", "POST", { id: auth.userId });
-      console.log(data);
       currentAvatar = data.avatar;
       setUserLogin(data.login);
       chooseAvatar(data.avatar, setAvatar, data.login);
@@ -79,7 +78,7 @@ export const Profile = () => {
         <div className="row">
           <div className="col s5 ">
             {/*change here for width (here was s12 m5 -> changed into s5)*/}
-            <div className="card deep-orange darken-3">
+            <div className="card cardProf deep-orange darken-3">
               <div className="card-image profileBlockImage">
                 <img className="profileImage" src={avatar} alt="avatar" />
                 <span className="card-title userNickname">{userLogin}</span>
