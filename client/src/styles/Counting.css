@@ -22,10 +22,13 @@
   cursor: pointer;
   padding: 20px;
   border-radius: 12px;
-  height: 100px;
+  height: 70vh;
+  width: 50vw;
   transform: scale(0.5);
   transition: 0.4s all;
   background-color: rgb(255, 115, 0);
+  background-image: url(https://img.game-news24.com/2022/04/Valorant-new-agent-20-tin-Bounty-hunter-Codename-Leaked.jpeg);
+  background-size: cover;
   border: 2px solid black;
 }
 

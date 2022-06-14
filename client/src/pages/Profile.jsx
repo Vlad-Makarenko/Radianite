@@ -39,7 +39,7 @@ export const Profile = () => {
       setLoseCount(data.lose_counter)
       setDrawCounter(data.draw_counter)
       const winrateRes = (data.win_counter / (data.win_counter + data.lose_counter + data.draw_counter) ) * 100;
-      setWinRate(winrateRes);
+      setWinRate(winrateRes.toFixed(2));
     } catch (e) {}
   }, [request, auth.userId]);
 
@@ -124,7 +124,7 @@ export const Profile = () => {
             </div>
             <div className="col s6 textRate statBlocksText">
               <h4>WinRate</h4>
-              <h4>{winRate}</h4>
+              <h4>{winRate}%</h4>
             </div>
           </div>
         </div>

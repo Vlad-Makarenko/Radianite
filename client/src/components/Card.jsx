@@ -5,7 +5,6 @@ import "../styles/Card.css";
 
 export const Card = ({ card, setPopupCard, side, placement, turn }) => {
   const { socket } = useContext(BattleContext);
-
   return (
     <div
       onMouseEnter={() => setPopupCard({...card, placement})}

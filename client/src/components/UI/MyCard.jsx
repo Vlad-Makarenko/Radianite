@@ -8,11 +8,15 @@ import Secret from "../../assets/cards/Secret.png";
 export const MyCard = ({ card, classes }) => {
   const [displayName, setDisplayName] = useState(Shirt);
   useEffect(() => {
-    if (!classes.includes("opponent")) {
-      if (!classes.includes("user") && card.status === "secret") {
-        setDisplayName(Secret);
-      } else {
-        chooseCard(card, setDisplayName);
+    if (classes.includes("countingside")) {
+      chooseCard(card, setDisplayName);
+    } else {
+      if (!classes.includes("opponent")) {
+        if (!classes.includes("user") && card.status === "secret") {
+          setDisplayName(Secret);
+        } else {
+          chooseCard(card, setDisplayName);
+        }
       }
     }
   }, [card, classes]);

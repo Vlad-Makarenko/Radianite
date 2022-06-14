@@ -79,7 +79,7 @@ module.exports = class Player {
     if (sign == "-") {
       this.health -= Math.round(amount);
     } else {
-      this.health += amount;
+      this.health += Math.round(amount);
       if (this.health > 50) {
         this.health = 50;
       }  
