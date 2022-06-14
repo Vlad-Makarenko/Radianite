@@ -113,6 +113,7 @@ module.exports = class Player {
       this.handCards.push(card);
       this.deck = this.deck.filter((data) => data.id != card.id);
     }
+    this.socket.emit("getDeckLength", this.deck.length)
   }
 
   takeNewCard(count) {
@@ -129,5 +130,6 @@ module.exports = class Player {
         this.deck = this.deck.filter((data) => data.id != card.id);
       }
     }
+    this.socket.emit("getDeckLength", this.deck.length)
   }
 };
