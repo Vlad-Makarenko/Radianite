@@ -92,38 +92,37 @@
   }
 }
 
-.homeDevs{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-    margin: 1.5%;
+.homeDevs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  margin: 1.5%;
 }
 
-.DevImg{
-    border-radius: 50%;
-    height: 25vh;
+.DevImg {
+  border-radius: 50%;
+  height: 25vh;
 }
-.DevImgCont{
-    display: flex;
-    justify-content: center; ;
+.DevImgCont {
+  display: flex;
+  justify-content: center;
 }
 
-.homeDev{
+.homeDev {
   box-shadow: 1px 1px 40px rgba(255, 221, 0, 0.5);
 
-    border: 1px solid bisque;
-    padding: 1%;
-    border-radius: 20px;
-    margin: 1%;
-    background-color: rgba(250, 235, 215, 0.186);
-    width: 25vw;
+  border: 1px solid bisque;
+  padding: 1%;
+  border-radius: 20px;
+  margin: 1%;
+  background-color: rgba(250, 235, 215, 0.186);
+  width: 25vw;
 }
 
-
-.DevName{
-    margin-top: 5px;
-    text-align: center;
-    font-size: 3vh;
-    color: white;
+.DevName {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 3vh;
+  color: white;
 }

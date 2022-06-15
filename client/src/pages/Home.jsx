@@ -23,7 +23,11 @@ export const Home = () => {
             Our&nbsp; "card-game",&nbsp; "Battle&nbsp; for&nbsp;
             Radianite",&nbsp; was&nbsp; created&nbsp; under&nbsp; Riot&nbsp;
             Games'&nbsp;{" "}
-            <a href="https://www.riotgames.com/en/legal" target="blank">
+            <a
+              href="https://www.riotgames.com/en/legal"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Legal&nbsp; Jibber&nbsp; Jabber"&nbsp;
             </a>{" "}
             policy&nbsp; using&nbsp; assets&nbsp; owned&nbsp; by&nbsp;
@@ -87,7 +91,11 @@ export const Home = () => {
             }}
           >
             Member&nbsp; of&nbsp; Innovation&nbsp; campus&nbsp; from&nbsp;{" "}
-            <a href="https://ucode.world/en/it-world/" target="blank">
+            <a
+              href="https://ucode.world/en/it-world/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               UCODe&nbsp; it&nbsp; academy&nbsp;
             </a>
           </p>
@@ -114,7 +122,11 @@ export const Home = () => {
             }}
           >
             Member&nbsp; of&nbsp; Innovation&nbsp; campus&nbsp; from&nbsp;{" "}
-            <a href="https://ucode.world/en/it-world/" target="blank">
+            <a
+              href="https://ucode.world/en/it-world/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               UCODe&nbsp; it&nbsp; academy&nbsp;
             </a>
           </p>

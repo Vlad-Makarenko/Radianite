@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "material-icons";
 import { Sound } from "./Sound";
 import { AuthContext } from "../contexts/AuthContext";
+import "material-icons";
 
 export const Navbar = () => {
   const auth = useContext(AuthContext);
@@ -24,6 +24,9 @@ export const Navbar = () => {
         </a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li className="waves-effect">
+            <Sound />
+          </li>
+          <li className="waves-effect">
             <NavLink to="/battle">Battle</NavLink>
           </li>
           <li className="waves-effect">
@@ -33,9 +36,6 @@ export const Navbar = () => {
             <NavLink to="/profile">
               <i className="material-icons">person_pin</i>
             </NavLink>
-          </li>
-          <li>
-            <Sound/>
           </li>
           <li className="waves-effect">
             <a href="/" onClick={logoutHandler}>
