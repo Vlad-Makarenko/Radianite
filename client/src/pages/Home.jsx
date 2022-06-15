@@ -22,9 +22,12 @@ export const Home = () => {
           <p>
             Our&nbsp; "card-game",&nbsp; "Battle&nbsp; for&nbsp;
             Radianite",&nbsp; was&nbsp; created&nbsp; under&nbsp; Riot&nbsp;
-            Games'&nbsp; "Legal&nbsp; Jibber&nbsp; Jabber"&nbsp; policy&nbsp;
-            using&nbsp; assets&nbsp; owned&nbsp; by&nbsp; Riot&nbsp;
-            Games.&nbsp; Riot&nbsp; Games&nbsp; does&nbsp; not&nbsp;
+            Games'&nbsp;{" "}
+            <a href="https://www.riotgames.com/en/legal" target="blank">
+              Legal&nbsp; Jibber&nbsp; Jabber"&nbsp;
+            </a>{" "}
+            policy&nbsp; using&nbsp; assets&nbsp; owned&nbsp; by&nbsp;
+            Riot&nbsp; Games.&nbsp; Riot&nbsp; Games&nbsp; does&nbsp; not&nbsp;
             endorse&nbsp; or&nbsp; sponsor&nbsp; this&nbsp; project.&nbsp;
             We&nbsp; used&nbsp; intellectual&nbsp; property&nbsp; of&nbsp;
             Riot&nbsp; Games&nbsp; to&nbsp; create&nbsp; this&nbsp; fan&nbsp;
@@ -83,7 +86,10 @@ export const Home = () => {
               textAlign: "center",
             }}
           >
-            Student of NTU KhPI
+            Member&nbsp; of&nbsp; Innovation&nbsp; campus&nbsp; from&nbsp;{" "}
+            <a href="https://ucode.world/en/it-world/" target="blank">
+              UCODe&nbsp; it&nbsp; academy&nbsp;
+            </a>
           </p>
         </a>
         <a
@@ -107,7 +113,10 @@ export const Home = () => {
               textAlign: "center",
             }}
           >
-            Student of NTU KhPI
+            Member&nbsp; of&nbsp; Innovation&nbsp; campus&nbsp; from&nbsp;{" "}
+            <a href="https://ucode.world/en/it-world/" target="blank">
+              UCODe&nbsp; it&nbsp; academy&nbsp;
+            </a>
           </p>
         </a>
       </div>
